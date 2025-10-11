@@ -7,4 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--Backgroud-->
+    <color name="app_background">#FF2C2C2E</color>
+
+    <!--Alarm Cards-->
+<!--    <color name="alarm_design_gradient">#FF2C2C2E</color>-->
+<!--    <color name="alarm_design_solid">#FF2C2C2E</color>-->
+
+    <!--Accent-->
+    <color name="blue_accent">#0013FF</color>
+    <color name="purple_accent">#8349FF</color>
+    <color name="pink_accent">#FFCDFF</color>
+    <color name="turquoise_accent">#00FFFF</color>
 </resources>
