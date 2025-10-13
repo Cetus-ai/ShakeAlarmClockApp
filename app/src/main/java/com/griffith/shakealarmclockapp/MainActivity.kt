@@ -14,16 +14,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ClipOp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 
 class MainActivity : ComponentActivity() {
@@ -36,25 +35,34 @@ class MainActivity : ComponentActivity() {
                     background = Color(0xFF2C2C2E)
                 )
             ){
-                Scaffold(
-                    floatingActionButton = {
-                        FloatingActionButton(onClick = {CreateAlarm()}) {
-                            Icon(Icons.Filled.Add, "Add Alarm")
+                val navController = rememberNavController()
+
+                NavHost(
+                    navController = navController,
+                    startDestination = "home"
+                ){
+                    composable("home"){
+                        Scaffold(
+                            floatingActionButton = {
+                                FloatingActionButton(onClick = {navController.navigate("create")}) {
+                                    Icon(Icons.Filled.Add, "Add Alarm")
+                                }
+                            }
+                        ){ paddingValues ->
+                            Column (
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(paddingValues),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ){
+                                Text(
+                                    text = "Alarms",
+                                    fontSize = 30.sp,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
                         }
-                    }
-                ){ paddingValues ->
-                    Column (
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(paddingValues),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ){
-                    Text(
-                        text = "Alarms",
-                        fontSize = 30.sp,
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold
-                    )
                     }
                 }
             }
