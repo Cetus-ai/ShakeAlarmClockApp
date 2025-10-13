@@ -1,28 +1,45 @@
 package com.griffith.shakealarmclockapp
 
+import android.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TimePicker
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.rememberTimePickerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.core.content.contentValuesOf
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import java.util.Calendar
 
 
 class MainActivity : ComponentActivity() {
@@ -36,6 +53,7 @@ class MainActivity : ComponentActivity() {
                 )
             ){
                 val navController = rememberNavController()
+                var alarmName by remember { mutableStateOf("") }
 
                 NavHost(
                     navController = navController,
@@ -64,12 +82,84 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     }
+
+                    composable("create"){
+                        Scaffold()
+                        { paddingValues ->
+
+                            val timerPickerState = rememberTimePickerState(
+                                initialHour = 6,
+                                initialMinute = 30,
+                                is24Hour = false
+                            )
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(paddingValues)
+                            ) {
+                                Row (
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ){
+                                    TextButton(onClick = {
+                                        navController.popBackStack()
+                                    }) { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
+                                    Text(
+                                        text = "Set Alarm",
+                                        fontSize = 30.sp,
+                                        color = Color.White,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    TextButton(onClick = {
+                                        navController.popBackStack()
+                                    }) {
+                                        Text("Save", color = Color.Blue, fontSize = 18.sp)
+                                    }
+                                }
+                                Row (
+                                    modifier = Modifier
+                                        .fillMaxSize()
+//                                        .padding(paddingValues)
+                                ){
+                                    OutlinedTextField(
+                                        value = alarmName,
+                                        onValueChange = { alarmName = it },
+                                        label = {Text("Alarm Name")}
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 }
 
-fun CreateAlarm(){
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DialExample(
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+) {
+    val currentTime = Calendar.getInstance()
 
+    val timePickerState = rememberTimePickerState(
+        initialHour = currentTime.get(Calendar.HOUR_OF_DAY),
+        initialMinute = currentTime.get(Calendar.MINUTE),
+        is24Hour = true,
+    )
+
+    Column {
+        TimePicker(
+            state = timePickerState,
+        )
+        Button(onClick = onDismiss) {
+            Text("Dismiss picker")
+        }
+        Button(onClick = onConfirm) {
+            Text("Confirm selection")
+        }
+    }
 }
