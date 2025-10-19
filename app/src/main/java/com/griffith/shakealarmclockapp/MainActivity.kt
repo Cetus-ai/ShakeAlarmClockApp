@@ -10,12 +10,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -34,11 +37,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.contentValuesOf
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import java.sql.Time
 import java.util.Calendar
 
 
@@ -96,6 +101,7 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .padding(paddingValues)
+                                    .verticalScroll(rememberScrollState())
                             ) {
                                 Row (
                                     modifier = Modifier.fillMaxWidth(),
@@ -117,49 +123,24 @@ class MainActivity : ComponentActivity() {
                                         Text("Save", color = Color.Blue, fontSize = 18.sp)
                                     }
                                 }
-                                Row (
-                                    modifier = Modifier
-                                        .fillMaxSize()
-//                                        .padding(paddingValues)
+                                Column (
+                                    modifier = Modifier.fillMaxSize(),
+                                    horizontalAlignment = Alignment.CenterHorizontally
                                 ){
                                     OutlinedTextField(
                                         value = alarmName,
                                         onValueChange = { alarmName = it },
-                                        label = {Text("Alarm Name")}
+                                        label = {Text("Alarm Name")},
+                                        modifier = Modifier.padding(bottom = 32.dp)
                                     )
+
+                                    TimePicker(state = timerPickerState)
                                 }
                             }
                         }
                     }
                 }
             }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DialExample(
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit,
-) {
-    val currentTime = Calendar.getInstance()
-
-    val timePickerState = rememberTimePickerState(
-        initialHour = currentTime.get(Calendar.HOUR_OF_DAY),
-        initialMinute = currentTime.get(Calendar.MINUTE),
-        is24Hour = true,
-    )
-
-    Column {
-        TimePicker(
-            state = timePickerState,
-        )
-        Button(onClick = onDismiss) {
-            Text("Dismiss picker")
-        }
-        Button(onClick = onConfirm) {
-            Text("Confirm selection")
         }
     }
 }
