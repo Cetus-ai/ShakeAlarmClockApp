@@ -1,6 +1,5 @@
 package com.griffith.shakealarmclockapp
 
-import android.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,14 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -30,7 +26,6 @@ import androidx.compose.material3.TimeInput
 import androidx.compose.material3.TimePicker
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.rememberTimePickerState
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,15 +35,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.contentValuesOf
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import java.sql.Time
-import java.util.Calendar
+
 
 
 class MainActivity : ComponentActivity() {
@@ -61,7 +53,7 @@ class MainActivity : ComponentActivity() {
                     background = Color(0xFF2C2C2E)
                 )
             ){
-                val navController = rememberNavController()
+//                val navController = rememberNavController()
                 var alarmName by remember { mutableStateOf("") }
                 var note by remember { mutableStateOf(" ")}
 
@@ -70,27 +62,27 @@ class MainActivity : ComponentActivity() {
                     startDestination = "home"
                 ){
                     composable("home"){
-                        Scaffold(
-                            floatingActionButton = {
-                                FloatingActionButton(onClick = {navController.navigate("create")}) {
-                                    Icon(Icons.Filled.Add, "Add Alarm")
-                                }
-                            }
-                        ){ paddingValues ->
-                            Column (
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(paddingValues),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ){
-                                Text(
-                                    text = "Alarms",
-                                    fontSize = 30.sp,
-                                    color = Color.White,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
-                        }
+//                        Scaffold(
+//                            floatingActionButton = {
+//                                FloatingActionButton(onClick = {navController.navigate("create")}) {
+//                                    Icon(Icons.Filled.Add, "Add Alarm")
+//                                }
+//                            }
+//                        ){ paddingValues ->
+//                            Column (
+//                                modifier = Modifier
+//                                    .fillMaxSize()
+//                                    .padding(paddingValues),
+//                                horizontalAlignment = Alignment.CenterHorizontally
+//                            ){
+//                                Text(
+//                                    text = "Alarms",
+//                                    fontSize = 30.sp,
+//                                    color = Color.White,
+//                                    fontWeight = FontWeight.Bold
+//                                )
+//                            }
+//                        }
                     }
 
                     composable("create"){
