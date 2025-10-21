@@ -17,13 +17,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun HomeScreen{
+fun HomeScreen(){
     Scaffold(
+//        floatingActionButton = {
+//            FloatingActionButton(onClick = {
+//                val navController = null
+//                navController.navigate("create")
+//            }) {
+//                Icon(Icons.Filled.Add, "Add Alarm")
+//            }
+//        }
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                val navController = null
-                navController.navigate("create")
-            }) {
+            val addAlarmClick = null
+            FloatingActionButton(onClick = { addAlarmClick }) {
                 Icon(Icons.Filled.Add, "Add Alarm")
             }
         }
