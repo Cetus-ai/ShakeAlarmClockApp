@@ -27,6 +27,7 @@ fun HomeScreen(){
 //                Icon(Icons.Filled.Add, "Add Alarm")
 //            }
 //        }
+
         floatingActionButton = {
             val addAlarmClick = null
             FloatingActionButton(onClick = { addAlarmClick }) {
