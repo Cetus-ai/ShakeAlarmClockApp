@@ -5,7 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
-import com.griffith.shakealarmclockapp.ui.theme.create.Test
+import com.griffith.shakealarmclockapp.ui.theme.create.CreateAlarm
 
 @Composable
 fun NavGraph(
@@ -29,7 +29,7 @@ fun NavGraph(
         }
 
         composable("create"){
-            Test();
+            CreateAlarm();
         }
     }
 }

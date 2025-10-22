@@ -37,10 +37,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavGraph
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-
+import com.griffith.shakealarmclockapp.navigation.NavGraph
 
 
 class MainActivity : ComponentActivity() {
@@ -53,110 +55,112 @@ class MainActivity : ComponentActivity() {
                     background = Color(0xFF2C2C2E)
                 )
             ){
-//                val navController = rememberNavController()
-                var alarmName by remember { mutableStateOf("") }
-                var note by remember { mutableStateOf(" ")}
-
-                NavHost(
-                    navController = navController,
-                    startDestination = "home"
-                ){
-                    composable("home"){
-//                        Scaffold(
-//                            floatingActionButton = {
-//                                FloatingActionButton(onClick = {navController.navigate("create")}) {
-//                                    Icon(Icons.Filled.Add, "Add Alarm")
-//                                }
-//                            }
-//                        ){ paddingValues ->
-//                            Column (
+                val navController = rememberNavController()
+                NavGraph(navController = navController)
+////                val navController = rememberNavController()
+//                var alarmName by remember { mutableStateOf("") }
+//                var note by remember { mutableStateOf(" ")}
+//
+//                NavHost(
+//                    navController = navController,
+//                    startDestination = "home"
+//                ){
+//                    composable("home"){
+////                        Scaffold(
+////                            floatingActionButton = {
+////                                FloatingActionButton(onClick = {navController.navigate("create")}) {
+////                                    Icon(Icons.Filled.Add, "Add Alarm")
+////                                }
+////                            }
+////                        ){ paddingValues ->
+////                            Column (
+////                                modifier = Modifier
+////                                    .fillMaxSize()
+////                                    .padding(paddingValues),
+////                                horizontalAlignment = Alignment.CenterHorizontally
+////                            ){
+////                                Text(
+////                                    text = "Alarms",
+////                                    fontSize = 30.sp,
+////                                    color = Color.White,
+////                                    fontWeight = FontWeight.Bold
+////                                )
+////                            }
+////                        }
+//                    }
+//
+//                    composable("create"){
+//                        Scaffold()
+//                        { paddingValues ->
+//
+//                            val timerPickerState = rememberTimePickerState(
+//                                initialHour = 6,
+//                                initialMinute = 30,
+//                                is24Hour = false
+//                            )
+//                            Column(
 //                                modifier = Modifier
 //                                    .fillMaxSize()
-//                                    .padding(paddingValues),
-//                                horizontalAlignment = Alignment.CenterHorizontally
-//                            ){
-//                                Text(
-//                                    text = "Alarms",
-//                                    fontSize = 30.sp,
-//                                    color = Color.White,
-//                                    fontWeight = FontWeight.Bold
-//                                )
+//                                    .padding(paddingValues)
+//                                    .verticalScroll(rememberScrollState())
+//                            ) {
+//                                Row (
+//                                    modifier = Modifier.fillMaxWidth(),
+//                                    horizontalArrangement = Arrangement.SpaceBetween,
+//                                    verticalAlignment = Alignment.CenterVertically
+//                                ){
+//                                    TextButton(onClick = {
+//                                        navController.popBackStack()
+//                                    }) { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
+//                                    Text(
+//                                        text = "Set Alarm",
+//                                        fontSize = 30.sp,
+//                                        color = Color.White,
+//                                        fontWeight = FontWeight.Bold
+//                                    )
+//                                    TextButton(onClick = {
+//                                        navController.popBackStack()
+//                                    }) {
+//                                        Text("Save", color = Color.Blue, fontSize = 18.sp)
+//                                    }
+//                                }
+//                                Column (
+//                                    modifier = Modifier.fillMaxSize(),
+//                                    horizontalAlignment = Alignment.CenterHorizontally
+//                                ){
+//                                    OutlinedTextField(
+//                                        value = alarmName,
+//                                        onValueChange = { alarmName = it },
+//                                        label = {Text("Alarm Name")},
+//                                        modifier = Modifier.padding(bottom = 32.dp)
+//                                    )
+//
+//                                    TimePicker(state = timerPickerState)
+//
+//                                    Row(
+//                                        modifier = Modifier.fillMaxWidth(),
+//                                        horizontalArrangement = Arrangement.SpaceBetween,
+//                                        verticalAlignment = Alignment.CenterVertically
+//                                    ){
+//                                        Box(modifier = Modifier.scale(0.8f)){
+//                                            //TimePicker(state = timerPickerState)
+//                                            TimeInput(
+//                                                modifier = Modifier,
+//                                                state = timerPickerState
+//                                            )
+//                                        }
+//                                        OutlinedTextField(
+//                                            value = note,
+//                                            onValueChange = {note = it},
+//                                            label = {Text("Note")},
+//                                            modifier = Modifier.padding(start = 10.dp, bottom = 80.dp)
+//                                        )
+//                                    }
+//                                }
 //                            }
 //                        }
-                    }
-
-                    composable("create"){
-                        Scaffold()
-                        { paddingValues ->
-
-                            val timerPickerState = rememberTimePickerState(
-                                initialHour = 6,
-                                initialMinute = 30,
-                                is24Hour = false
-                            )
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(paddingValues)
-                                    .verticalScroll(rememberScrollState())
-                            ) {
-                                Row (
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ){
-                                    TextButton(onClick = {
-                                        navController.popBackStack()
-                                    }) { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
-                                    Text(
-                                        text = "Set Alarm",
-                                        fontSize = 30.sp,
-                                        color = Color.White,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                    TextButton(onClick = {
-                                        navController.popBackStack()
-                                    }) {
-                                        Text("Save", color = Color.Blue, fontSize = 18.sp)
-                                    }
-                                }
-                                Column (
-                                    modifier = Modifier.fillMaxSize(),
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ){
-                                    OutlinedTextField(
-                                        value = alarmName,
-                                        onValueChange = { alarmName = it },
-                                        label = {Text("Alarm Name")},
-                                        modifier = Modifier.padding(bottom = 32.dp)
-                                    )
-
-                                    TimePicker(state = timerPickerState)
-
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ){
-                                        Box(modifier = Modifier.scale(0.8f)){
-                                            //TimePicker(state = timerPickerState)
-                                            TimeInput(
-                                                modifier = Modifier,
-                                                state = timerPickerState
-                                            )
-                                        }
-                                        OutlinedTextField(
-                                            value = note,
-                                            onValueChange = {note = it},
-                                            label = {Text("Note")},
-                                            modifier = Modifier.padding(start = 10.dp, bottom = 80.dp)
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+//                    }
+//                }
             }
         }
     }

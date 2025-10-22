@@ -10,6 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen(onAddAlarmClick: () -> Unit){
     Scaffold(
 //        floatingActionButton = {
 //            FloatingActionButton(onClick = {
@@ -30,7 +31,7 @@ fun HomeScreen(){
 
         floatingActionButton = {
             val addAlarmClick = null
-            FloatingActionButton(onClick = { addAlarmClick }) {
+            FloatingActionButton(onClick = onAddAlarmClick ) {
                 Icon(Icons.Filled.Add, "Add Alarm")
             }
         }
