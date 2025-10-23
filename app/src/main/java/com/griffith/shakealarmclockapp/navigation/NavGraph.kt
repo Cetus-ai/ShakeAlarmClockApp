@@ -29,7 +29,9 @@ fun NavGraph(
         }
 
         composable("create"){
-            CreateAlarm();
+            CreateAlarm(
+                onCancel = {navController.navigate(route = "home")}
+            )
         }
     }
 }
