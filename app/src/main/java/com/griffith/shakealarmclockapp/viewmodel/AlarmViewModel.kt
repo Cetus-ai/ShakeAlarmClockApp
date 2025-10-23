@@ -6,9 +6,15 @@ import com.griffith.shakealarmclockapp.data.Alarm
 
 val alarms = mutableListOf<Alarm>()
 
-class ViewModel(){
-    fun onSafeAlarmClick(name: String, hour: Int, minute: Int, isEnable: Boolean ){
-
+class AlarmViewModel : ViewModel(){
+    fun addAlarm(_name: String, _hour: Int, _minute: Int, _isEnable: Boolean ){
+        val newAlarm = Alarm(
+            name = _name,
+            hour = _hour,
+            minute = _minute,
+            isEnable = _isEnable
+        )
+        alarms.add(newAlarm)
     }
 
 //val id: String = UUID.randomUUID().toString(),

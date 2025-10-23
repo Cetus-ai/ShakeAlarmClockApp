@@ -8,14 +8,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.create.CreateAlarm
-import com.griffith.shakealarmclockapp.viewmodel.onSafeAlarmClick
+import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 @Composable
 fun NavGraph(
     navController: NavHostController
 ){
     //val navController = rememberNavController()
-    val viewmodel = remember { ViewModel() }
+    val viewmodel = remember { AlarmViewModel() }
 
     NavHost(navController = navController, startDestination = "home"){
 
@@ -35,9 +35,7 @@ fun NavGraph(
         composable("create"){
             CreateAlarm(
                 onCancel = {navController.navigate(route = "home")},
-                onSafeAlarmClick = {name, hour, minute ->
-                    alarmViewModel.addAlarm(name, hour, minute)  // ← Alarm hinzufügen
-                    navController.popBackStack()                // ← Zurück zur Liste
+                onSafeAlarmClick = { viewmodel.addAlarm()}
                 }
             )
         }
