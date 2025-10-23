@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.griffith.shakealarmclockapp.viewmodel.safeAlarm
+import com.griffith.shakealarmclockapp.viewmodel.onSafeAlarmClick
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,6 +61,12 @@ fun CreateAlarm(onCancel: () -> Unit){
                     fontWeight = FontWeight.Bold
                 )
                 TextButton(onClick = {
+                    onSafeAlarmClick(
+                        alarmName,
+                        timerPickerState.hour,
+                        timerPickerState.minute,
+                        timerPickerState.is24hour
+                    )
                 }) {
                     Text("Save", color = Color.Blue, fontSize = 18.sp)
                 }

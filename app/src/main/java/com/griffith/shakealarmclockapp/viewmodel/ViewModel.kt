@@ -1,8 +1,10 @@
 package com.griffith.shakealarmclockapp.viewmodel
 
-import java.util.UUID
+import com.griffith.shakealarmclockapp.data.Alarm
 
-fun safeAlarm(name: String, hour: Int, minute: Int, isEnable: Boolean ){
+
+val alarms = mutableListOf<Alarm>()
+fun onSafeAlarmClick(name: String, hour: Int, minute: Int, isEnable: Boolean ){
 
 }
 
