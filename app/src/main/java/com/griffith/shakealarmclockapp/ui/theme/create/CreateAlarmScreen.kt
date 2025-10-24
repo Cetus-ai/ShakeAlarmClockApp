@@ -28,7 +28,10 @@ import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateAlarm(onCancel: () -> Unit){
+fun CreateAlarm(
+    onCancel: () -> Unit,
+    onSafeAlarmClick: (String, Int, Int, Boolean) -> Unit
+){
 
     var alarmName by remember { mutableStateOf("") }
 //    var note by remember { mutableStateOf("") }
