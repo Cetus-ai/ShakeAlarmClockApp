@@ -9,12 +9,14 @@ import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.create.CreateAlarm
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
+
 @Composable
 fun NavGraph(
     navController: NavHostController
 ){
     //val navController = rememberNavController()
     val viewmodel = remember { AlarmViewModel() }
+
 
     NavHost(navController = navController, startDestination = "home"){
 
@@ -27,6 +29,7 @@ fun NavGraph(
 //        }
         composable("home"){          //string-Navigation
             HomeScreen(                     //<--- if Button click, navigator guides to "create"
+                alarms = viewmodel.alarms,
                 onAddAlarmClick = { navController.navigate(route = "create")}
             )
         }

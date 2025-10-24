@@ -3,10 +3,9 @@ package com.griffith.shakealarmclockapp.viewmodel
 import androidx.lifecycle.ViewModel
 import com.griffith.shakealarmclockapp.data.Alarm
 
-
-val alarms = mutableListOf<Alarm>()
-
 class AlarmViewModel : ViewModel(){
+    val alarms = mutableListOf<Alarm>()
+
     fun addAlarm(_name: String, _hour: Int, _minute: Int, _isEnable: Boolean ){
         val newAlarm = Alarm(
             name = _name,
