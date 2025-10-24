@@ -29,7 +29,7 @@ fun NavGraph(
 //        }
         composable("home"){          //string-Navigation
             HomeScreen(                     //<--- if Button click, navigator guides to "create"
-                alarms = viewmodel.alarms,
+                alarmsListing = viewmodel.alarms,
                 onAddAlarmClick = { navController.navigate(route = "create")}
             )
         }

@@ -25,20 +25,10 @@ import com.griffith.shakealarmclockapp.data.Alarm
 
 @Composable
 fun HomeScreen(
-    alarms: List<Alarm>,
+    alarmsListing: List<Alarm>,
     onAddAlarmClick: () -> Unit
 ){
-//    alarms: List<Alarm>
     Scaffold(
-//        floatingActionButton = {
-//            FloatingActionButton(onClick = {
-//                val navController = null
-//                navController.navigate("create")
-//            }) {
-//                Icon(Icons.Filled.Add, "Add Alarm")
-//            }
-//        }
-
         floatingActionButton = {
             val addAlarmClick = null
             FloatingActionButton(onClick = onAddAlarmClick ) {
@@ -64,7 +54,7 @@ fun HomeScreen(
                     .fillMaxSize()
                     .padding(paddingValues)
             ){
-                items(alarms){ alarm ->
+                items(alarmsListing){ alarm ->
                     Alarm(
                         alarm.id,
                         alarm.name,
@@ -72,6 +62,7 @@ fun HomeScreen(
                         alarm.minute,
                         alarm.isEnable
                     )
+                    Text("id: " + alarm.id + "\nname: " + alarm.name + "\n" + alarm.hour + ":" + alarm.minute + "\nOn/Off: " + alarm.isEnable)
                 }
             }
         }
