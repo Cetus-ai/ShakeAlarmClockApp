@@ -1,6 +1,7 @@
 package com.griffith.shakealarmclockapp.ui.theme.create
 
 import android.R
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@SuppressLint("InvalidColorHexValue")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateAlarm(
@@ -34,7 +36,10 @@ fun CreateAlarm(
 ){
 
     var alarmName by remember { mutableStateOf("") }
-    val days = BooleanArray(6) {false}
+//    val days = BooleanArray(6) {false}
+    val days = remember { mutableListOf<Boolean>().apply {
+        repeat(7) {add(false)}
+    } }
 //    var note by remember { mutableStateOf("") }
 
     val timerPickerState = rememberTimePickerState(
@@ -90,9 +95,48 @@ fun CreateAlarm(
 
                 TimePicker(state = timerPickerState)
 
-                Row {
+                Row {                                                                               //Its pretty repetitive. TODO(Foreach) for more dynamic
                     TextButton(onClick = { days[0] = true }) {
-                        Text("Mo")
+                        Text("Mon",
+                            color = if(days[0]) Color(0xFFFFA500) else Color.LightGray,
+                            fontSize = 18.sp
+                        )
+                    }
+                    TextButton(onClick = { days[1] = true }) {
+                        Text("Tue",
+                            color = if(days[1]) Color(0xFFFFA500) else Color.LightGray,
+                            fontSize = 18.sp
+                        )
+                    }
+                    TextButton(onClick = { days[2] = true }) {
+                        Text("Wed",
+                            color = if(days[2]) Color(0xFFFFA500) else Color.LightGray,
+                            fontSize = 18.sp
+                        )
+                    }
+                    TextButton(onClick = { days[3] = true }) {
+                        Text("Thu",
+                            color = if(days[3]) Color(0xFFFFA500) else Color.LightGray,
+                            fontSize = 18.sp
+                        )
+                    }
+                    TextButton(onClick = { days[4] = true }) {
+                        Text("Fri",
+                            color = if(days[4]) Color(0xFFFFA500) else Color.LightGray,
+                            fontSize = 18.sp
+                        )
+                    }
+                    TextButton(onClick = { days[5] = true }) {
+                        Text("Sat",
+                            color = if(days[5]) Color(0xFFFFA500) else Color.LightGray,
+                            fontSize = 18.sp
+                        )
+                    }
+                    TextButton(onClick = { days[6] = true }) {
+                        Text("Sun",
+                            color = if(days[6]) Color(0xFFFFA500) else Color.LightGray,
+                            fontSize = 18.sp
+                        )
                     }
                 }
             }
