@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.create.CreateAlarm
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
+import com.griffith.shakealarmclockapp.ui.theme.home.AlarmItem
 
 
 @Composable
@@ -30,7 +31,7 @@ fun NavGraph(
         composable("home"){          //string-Navigation
             HomeScreen(                     //<--- if Button click, navigator guides to "create"
                 alarmsListing = viewmodel.alarms,
-                onAddAlarmClick = { navController.navigate(route = "create")}
+                onAddAlarmClick = { navController.navigate(route = "create")},
             )
         }
 

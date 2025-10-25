@@ -1,5 +1,6 @@
 package com.griffith.shakealarmclockapp.ui.theme.create
 
+import android.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,7 +25,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,6 +34,7 @@ fun CreateAlarm(
 ){
 
     var alarmName by remember { mutableStateOf("") }
+    val days = BooleanArray(6) {false}
 //    var note by remember { mutableStateOf("") }
 
     val timerPickerState = rememberTimePickerState(
@@ -89,93 +90,12 @@ fun CreateAlarm(
 
                 TimePicker(state = timerPickerState)
 
-//                Row(
-//                    modifier = Modifier.fillMaxWidth(),
-//                    horizontalArrangement = Arrangement.SpaceBetween,
-//                    verticalAlignment = Alignment.CenterVertically
-//                ){
-//                    Box(modifier = Modifier.scale(0.8f)){
-//                        TimeInput(
-//                            modifier = Modifier,
-//                            state = timerPickerState
-//                        )
-//                    }
-//                    OutlinedTextField(
-//                        value = note,
-//                        onValueChange = {note = it},
-//                        label = {Text("Note")},
-//                        modifier = Modifier.padding(start = 10.dp, bottom = 40.dp)
-//                    )
-//                }
+                Row {
+                    TextButton(onClick = { days[0] = true }) {
+                        Text("Mo")
+                    }
+                }
             }
         }
     }
-//    Scaffold()
-//    { paddingValues ->
-//
-//        val timerPickerState = rememberTimePickerState(
-//            initialHour = 6,
-//            initialMinute = 30,
-//            is24Hour = false
-//        )
-//        Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(paddingValues)
-//                .verticalScroll(rememberScrollState())
-//        ) {
-//            Row (
-//                modifier = Modifier.fillMaxWidth(),
-//                horizontalArrangement = Arrangement.SpaceBetween,
-//                verticalAlignment = Alignment.CenterVertically
-//            ){
-//                TextButton(onClick = {
-//                    navController.popBackStack()
-//                }) { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
-//                Text(
-//                    text = "Set Alarm",
-//                    fontSize = 30.sp,
-//                    color = Color.White,
-//                    fontWeight = FontWeight.Bold
-//                )
-//                TextButton(onClick = {
-//                    navController.popBackStack()
-//                }) {
-//                    Text("Save", color = Color.Blue, fontSize = 18.sp)
-//                }
-//            }
-//            Column (
-//                modifier = Modifier.fillMaxSize(),
-//                horizontalAlignment = Alignment.CenterHorizontally
-//            ){
-//                OutlinedTextField(
-//                    value = alarmName,
-//                    onValueChange = { alarmName = it },
-//                    label = {Text("Alarm Name")},
-//                    modifier = Modifier.padding(bottom = 32.dp)
-//                )
-//
-//                TimePicker(state = timerPickerState)
-//
-//                Row(
-//                    modifier = Modifier.fillMaxWidth(),
-//                    horizontalArrangement = Arrangement.SpaceBetween,
-//                    verticalAlignment = Alignment.CenterVertically
-//                ){
-//                    Box(modifier = Modifier.scale(0.8f)){
-//                        //TimePicker(state = timerPickerState)
-//                        TimeInput(
-//                            modifier = Modifier,
-//                            state = timerPickerState
-//                        )
-//                    }
-//                    OutlinedTextField(
-//                        value = note,
-//                        onValueChange = {note = it},
-//                        label = {Text("Note")},
-//                        modifier = Modifier.padding(start = 10.dp, bottom = 80.dp)
-//                    )
-//                }
-//            }
-//        }
 }
