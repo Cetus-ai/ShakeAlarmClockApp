@@ -37,6 +37,7 @@ fun CreateAlarm(
 ){
 
     var alarmName by remember { mutableStateOf("") }
+    val weekdays = listOf<String>("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")
 //    val days = BooleanArray(6) {false}
     val days = remember { mutableStateListOf<Boolean>().apply {
         repeat(7) { add(false) }
@@ -96,50 +97,63 @@ fun CreateAlarm(
 
                 TimePicker(state = timerPickerState)
 
-                Row {                                                                               //Its pretty repetitive. TODO(Foreach) for more dynamic
-                    TextButton(onClick = { days[0] = !days[0] }) {
-                        Text("Mon",
-                            color = if(days[0]) Color(0xFFFFA500) else Color.LightGray,
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ){
+                    weekdays.forEachIndexed { index, day ->
+                    TextButton(onClick = { days[index] = !days[index] }) {
+                        Text(day,
+                            color = if(days[index]) Color(0xFFFFA500) else Color.LightGray,
                             fontSize = 18.sp
-                        )
-                    }
-                    TextButton(onClick = { days[1] = !days[1] }) {
-                        Text("Tue",
-                            color = if(days[1]) Color(0xFFFFA500) else Color.LightGray,
-                            fontSize = 18.sp
-                        )
-                    }
-                    TextButton(onClick = { days[2] = !days[2] }) {
-                        Text("Wed",
-                            color = if(days[2]) Color(0xFFFFA500) else Color.LightGray,
-                            fontSize = 18.sp
-                        )
-                    }
-                    TextButton(onClick = { days[3] = !days[3] }) {
-                        Text("Thu",
-                            color = if(days[3]) Color(0xFFFFA500) else Color.LightGray,
-                            fontSize = 18.sp
-                        )
-                    }
-                    TextButton(onClick = { days[4] = !days[4] }) {
-                        Text("Fri",
-                            color = if(days[4]) Color(0xFFFFA500) else Color.LightGray,
-                            fontSize = 18.sp
-                        )
-                    }
-                    TextButton(onClick = { days[5] = !days[5] }) {
-                        Text("Sat",
-                            color = if(days[5]) Color(0xFFFFA500) else Color.LightGray,
-                            fontSize = 18.sp
-                        )
-                    }
-                    TextButton(onClick = { days[6] = !days[6] }) {
-                        Text("Sun",
-                            color = if(days[6]) Color(0xFFFFA500) else Color.LightGray,
-                            fontSize = 18.sp
-                        )
+                        ) }
                     }
                 }
+
+//                Row {                                                                               //Its pretty repetitive.
+//                    TextButton(onClick = { days[0] = !days[0] }) {
+//                        Text("Mon",
+//                            color = if(days[0]) Color(0xFFFFA500) else Color.LightGray,
+//                            fontSize = 18.sp
+//                        )
+//                    }
+//                    TextButton(onClick = { days[1] = !days[1] }) {
+//                        Text("Tue",
+//                            color = if(days[1]) Color(0xFFFFA500) else Color.LightGray,
+//                            fontSize = 18.sp
+//                        )
+//                    }
+//                    TextButton(onClick = { days[2] = !days[2] }) {
+//                        Text("Wed",
+//                            color = if(days[2]) Color(0xFFFFA500) else Color.LightGray,
+//                            fontSize = 18.sp
+//                        )
+//                    }
+//                    TextButton(onClick = { days[3] = !days[3] }) {
+//                        Text("Thu",
+//                            color = if(days[3]) Color(0xFFFFA500) else Color.LightGray,
+//                            fontSize = 18.sp
+//                        )
+//                    }
+//                    TextButton(onClick = { days[4] = !days[4] }) {
+//                        Text("Fri",
+//                            color = if(days[4]) Color(0xFFFFA500) else Color.LightGray,
+//                            fontSize = 18.sp
+//                        )
+//                    }
+//                    TextButton(onClick = { days[5] = !days[5] }) {
+//                        Text("Sat",
+//                            color = if(days[5]) Color(0xFFFFA500) else Color.LightGray,
+//                            fontSize = 18.sp
+//                        )
+//                    }
+//                    TextButton(onClick = { days[6] = !days[6] }) {
+//                        Text("Sun",
+//                            color = if(days[6]) Color(0xFFFFA500) else Color.LightGray,
+//                            fontSize = 18.sp
+//                        )
+//                    }
+//                }
             }
         }
     }
