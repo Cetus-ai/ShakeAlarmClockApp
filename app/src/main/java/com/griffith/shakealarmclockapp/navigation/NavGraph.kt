@@ -21,15 +21,8 @@ fun NavGraph(
 
     NavHost(navController = navController, startDestination = "home"){
 
-//        composable<home>{                 //Safe-Navigation
-//            HomeScreen(
-//                addAlarmClick = {
-//                    navController.navigate(route = "create")
-//                }
-//            )
-//        }
-        composable("home"){          //string-Navigation
-            HomeScreen(                     //<--- if Button click, navigator guides to "create"
+        composable("home"){
+            HomeScreen(
                 alarmsListing = viewmodel.alarms,
                 onAddAlarmClick = { navController.navigate(route = "create")},
             )
@@ -38,11 +31,11 @@ fun NavGraph(
         composable("create"){
             CreateAlarm(
                 onCancel = {navController.navigate(route = "home")},
-                onSafeAlarmClick = { name, hour, minute, _ ->
+                onSafeAlarmClick = { name, hour, minute, _, days ->
                     viewmodel.addAlarm(
-                        _name = name, _hour = hour, _minute = minute, _isEnable = true, List<String>
+                        _name = name, _hour = hour, _minute = minute, _isEnable = true, days
                     )
-                    navController.navigate("home");
+                    navController.navigate("home")
                 }
             )
         }

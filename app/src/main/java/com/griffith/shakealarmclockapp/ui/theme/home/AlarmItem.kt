@@ -2,6 +2,8 @@ package com.griffith.shakealarmclockapp.ui.theme.home
 
 import android.R
 import android.annotation.SuppressLint
+import android.view.RoundedCorner
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.MoreVert
@@ -43,7 +47,8 @@ fun AlarmItem(){
         name = "get up",
         hour = 7,
         minute = 30,
-        isEnable = true
+        isEnable = true,
+        days = listOf("Mon", "Tu")
     )
     Card (
         modifier = Modifier
@@ -73,6 +78,19 @@ fun AlarmItem(){
                     fontSize = 30.sp,
                     color = Color.White
                 )
+                LazyRow (
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ){
+                    items(alarm.days){ day ->
+                        Text(
+                            text = day,
+                            color = Color(0xFFFFA500),
+                            fontSize = 16.sp,
+                        )
+                    }
+                }
             }
 //            Spacer(modifier = Modifier.width(100.dp))
             Row (

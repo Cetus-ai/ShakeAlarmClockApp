@@ -29,10 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlin.text.get
 
-val weekdays = listOf<String>("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")
-val days = remember { mutableStateListOf<Boolean>().apply {
-    repeat(7) { add(false) }
-}}
 
 @SuppressLint("InvalidColorHexValue")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,11 +39,10 @@ fun CreateAlarm(
 ){
 
     var alarmName by remember { mutableStateOf("") }
-//    val days = BooleanArray(6) {false}
-//    val days = remember { mutableStateListOf<Boolean>().apply {
-//        repeat(7) { add(false) }
-//    }}
-//    var note by remember { mutableStateOf("") }
+    val weekdays = listOf<String>("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")
+    val days = remember { mutableStateListOf<Boolean>().apply {
+        repeat(7) { add(false) }
+    }}
 
     val timerPickerState = rememberTimePickerState(
         initialHour = 6,
@@ -77,12 +72,18 @@ fun CreateAlarm(
                     fontWeight = FontWeight.Bold
                 )
                 TextButton(onClick = {
+                    val result = mutableListOf<String>()
+                    for(i in days.indices){
+                        if(days[i]){
+                            result.add(weekdays[i])
+                        }
+                    }
                     onSafeAlarmClick(
                         alarmName,
                         timerPickerState.hour,
                         timerPickerState.minute,
                         timerPickerState.is24hour,
-                        selectedDays()
+                        result
                     )
                 }) {
                     Text("Save", color = Color.Blue, fontSize = 18.sp)
@@ -115,62 +116,7 @@ fun CreateAlarm(
                         ) }
                     }
                 }
-
-//                Row {                                                                               //Its pretty repetitive.
-//                    TextButton(onClick = { days[0] = !days[0] }) {
-//                        Text("Mon",
-//                            color = if(days[0]) Color(0xFFFFA500) else Color.LightGray,
-//                            fontSize = 18.sp
-//                        )
-//                    }
-//                    TextButton(onClick = { days[1] = !days[1] }) {
-//                        Text("Tue",
-//                            color = if(days[1]) Color(0xFFFFA500) else Color.LightGray,
-//                            fontSize = 18.sp
-//                        )
-//                    }
-//                    TextButton(onClick = { days[2] = !days[2] }) {
-//                        Text("Wed",
-//                            color = if(days[2]) Color(0xFFFFA500) else Color.LightGray,
-//                            fontSize = 18.sp
-//                        )
-//                    }
-//                    TextButton(onClick = { days[3] = !days[3] }) {
-//                        Text("Thu",
-//                            color = if(days[3]) Color(0xFFFFA500) else Color.LightGray,
-//                            fontSize = 18.sp
-//                        )
-//                    }
-//                    TextButton(onClick = { days[4] = !days[4] }) {
-//                        Text("Fri",
-//                            color = if(days[4]) Color(0xFFFFA500) else Color.LightGray,
-//                            fontSize = 18.sp
-//                        )
-//                    }
-//                    TextButton(onClick = { days[5] = !days[5] }) {
-//                        Text("Sat",
-//                            color = if(days[5]) Color(0xFFFFA500) else Color.LightGray,
-//                            fontSize = 18.sp
-//                        )
-//                    }
-//                    TextButton(onClick = { days[6] = !days[6] }) {
-//                        Text("Sun",
-//                            color = if(days[6]) Color(0xFFFFA500) else Color.LightGray,
-//                            fontSize = 18.sp
-//                        )
-//                    }
-//                }
             }
         }
-    }
-
-    fun selectedDays(): List<String>{
-        val result = mutableListOf<String>()
-        for(i in days.indices){
-            if(days[i]){
-                result.add(weekdays.toString())
-            }
-        }
-        return result;
     }
 }

@@ -22,7 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.griffith.shakealarmclockapp.data.Alarm
-import com.griffith.shakealarmclockapp.ui.theme.create.days
 
 @Composable
 fun HomeScreen(
