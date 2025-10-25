@@ -17,6 +17,7 @@ import androidx.compose.material3.TimePicker
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -37,9 +38,9 @@ fun CreateAlarm(
 
     var alarmName by remember { mutableStateOf("") }
 //    val days = BooleanArray(6) {false}
-    val days = remember { mutableListOf<Boolean>().apply {
-        repeat(7) {add(false)}
-    } }
+    val days = remember { mutableStateListOf<Boolean>().apply {
+        repeat(7) { add(false) }
+    }}
 //    var note by remember { mutableStateOf("") }
 
     val timerPickerState = rememberTimePickerState(
