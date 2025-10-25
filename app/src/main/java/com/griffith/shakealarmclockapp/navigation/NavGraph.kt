@@ -40,7 +40,7 @@ fun NavGraph(
                 onCancel = {navController.navigate(route = "home")},
                 onSafeAlarmClick = { name, hour, minute, _ ->
                     viewmodel.addAlarm(
-                        _name = name, _hour = hour, _minute = minute, _isEnable = true
+                        _name = name, _hour = hour, _minute = minute, _isEnable = true, List<String>
                     )
                     navController.navigate("home");
                 }

@@ -27,21 +27,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlin.text.get
+
+val weekdays = listOf<String>("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")
+val days = remember { mutableStateListOf<Boolean>().apply {
+    repeat(7) { add(false) }
+}}
 
 @SuppressLint("InvalidColorHexValue")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateAlarm(
     onCancel: () -> Unit,
-    onSafeAlarmClick: (String, Int, Int, Boolean) -> Unit
+    onSafeAlarmClick: (String, Int, Int, Boolean, List<String>) -> Unit
 ){
 
     var alarmName by remember { mutableStateOf("") }
-    val weekdays = listOf<String>("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")
 //    val days = BooleanArray(6) {false}
-    val days = remember { mutableStateListOf<Boolean>().apply {
-        repeat(7) { add(false) }
-    }}
+//    val days = remember { mutableStateListOf<Boolean>().apply {
+//        repeat(7) { add(false) }
+//    }}
 //    var note by remember { mutableStateOf("") }
 
     val timerPickerState = rememberTimePickerState(
@@ -76,7 +81,8 @@ fun CreateAlarm(
                         alarmName,
                         timerPickerState.hour,
                         timerPickerState.minute,
-                        timerPickerState.is24hour
+                        timerPickerState.is24hour,
+                        selectedDays()
                     )
                 }) {
                     Text("Save", color = Color.Blue, fontSize = 18.sp)
@@ -156,5 +162,15 @@ fun CreateAlarm(
 //                }
             }
         }
+    }
+
+    fun selectedDays(): List<String>{
+        val result = mutableListOf<String>()
+        for(i in days.indices){
+            if(days[i]){
+                result.add(weekdays.toString())
+            }
+        }
+        return result;
     }
 }

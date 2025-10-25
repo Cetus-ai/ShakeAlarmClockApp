@@ -9,5 +9,6 @@ data class Alarm(
     val name: String,
     val hour: Int,
     val minute: Int,
-    val isEnable: Boolean
+    val isEnable: Boolean,
+    val days: List<String>
 )
