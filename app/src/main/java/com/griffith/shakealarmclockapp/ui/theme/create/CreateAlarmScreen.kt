@@ -97,43 +97,43 @@ fun CreateAlarm(
                 TimePicker(state = timerPickerState)
 
                 Row {                                                                               //Its pretty repetitive. TODO(Foreach) for more dynamic
-                    TextButton(onClick = { days[0] = true }) {
+                    TextButton(onClick = { days[0] = !days[0] }) {
                         Text("Mon",
                             color = if(days[0]) Color(0xFFFFA500) else Color.LightGray,
                             fontSize = 18.sp
                         )
                     }
-                    TextButton(onClick = { days[1] = true }) {
+                    TextButton(onClick = { days[1] = !days[1] }) {
                         Text("Tue",
                             color = if(days[1]) Color(0xFFFFA500) else Color.LightGray,
                             fontSize = 18.sp
                         )
                     }
-                    TextButton(onClick = { days[2] = true }) {
+                    TextButton(onClick = { days[2] = !days[2] }) {
                         Text("Wed",
                             color = if(days[2]) Color(0xFFFFA500) else Color.LightGray,
                             fontSize = 18.sp
                         )
                     }
-                    TextButton(onClick = { days[3] = true }) {
+                    TextButton(onClick = { days[3] = !days[3] }) {
                         Text("Thu",
                             color = if(days[3]) Color(0xFFFFA500) else Color.LightGray,
                             fontSize = 18.sp
                         )
                     }
-                    TextButton(onClick = { days[4] = true }) {
+                    TextButton(onClick = { days[4] = !days[4] }) {
                         Text("Fri",
                             color = if(days[4]) Color(0xFFFFA500) else Color.LightGray,
                             fontSize = 18.sp
                         )
                     }
-                    TextButton(onClick = { days[5] = true }) {
+                    TextButton(onClick = { days[5] = !days[5] }) {
                         Text("Sat",
                             color = if(days[5]) Color(0xFFFFA500) else Color.LightGray,
                             fontSize = 18.sp
                         )
                     }
-                    TextButton(onClick = { days[6] = true }) {
+                    TextButton(onClick = { days[6] = !days[6] }) {
                         Text("Sun",
                             color = if(days[6]) Color(0xFFFFA500) else Color.LightGray,
                             fontSize = 18.sp
