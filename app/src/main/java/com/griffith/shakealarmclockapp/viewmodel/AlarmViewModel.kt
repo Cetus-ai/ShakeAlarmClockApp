@@ -17,9 +17,15 @@ class AlarmViewModel : ViewModel(){
         alarms.add(newAlarm)
     }
 
-//val id: String = UUID.randomUUID().toString(),
-//val name: String,
-//val hour: Int,
-//val minute: Int,
-//val isEnable: Boolean
+    fun toggleAlarm(alarmId: String){
+        val index = alarms.indexOfFirst { it.id == alarmId }
+        if (index != -1) {
+            val alarm = alarms[index]
+            if(alarm.isEnable){
+                false
+            }else{
+                !true
+            }
+        }
+    }
 }

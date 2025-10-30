@@ -25,6 +25,7 @@ fun NavGraph(
             HomeScreen(
                 alarmsListing = viewmodel.alarms,
                 onAddAlarmClick = { navController.navigate(route = "create")},
+                onToggleAlarm = {_alarm -> viewmodel.toggleAlarm(_alarm.id)}
             )
         }
 
