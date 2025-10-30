@@ -39,17 +39,19 @@ import androidx.compose.ui.unit.sp
 import com.griffith.shakealarmclockapp.data.Alarm
 
 @SuppressLint("DefaultLocale")
-@Preview
+//@Preview
 @Composable
-fun AlarmItem(){
-    val alarm = Alarm(
-        id = "1",
-        name = "get up",
-        hour = 7,
-        minute = 30,
-        isEnable = true,
-        days = listOf("Mon", "Tu")
-    )
+fun AlarmItem(
+    alarm: Alarm
+){
+//    val alarm = Alarm(
+//        id = "1",
+//        name = "get up",
+//        hour = 7,
+//        minute = 30,
+//        isEnable = true,
+//        days = listOf("Mon", "Tu")
+//    )
     Card (
         modifier = Modifier
             .fillMaxWidth(),
@@ -81,7 +83,7 @@ fun AlarmItem(){
                 LazyRow (
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier
-                        .fillMaxWidth()
+                        //.fillMaxWidth()
                 ){
                     items(alarm.days){ day ->
                         Text(
@@ -95,8 +97,13 @@ fun AlarmItem(){
 //            Spacer(modifier = Modifier.width(100.dp))
             Row (
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy((-110).dp),
+                horizontalArrangement = Arrangement.spacedBy((30).dp),
             ){
+                Switch(
+                    checked = alarm.isEnable,
+                    onCheckedChange = { onToggle() }
+                )
+
                 IconButton(onClick = { }) {
                     Icon(
                         Icons.Default.MoreVert,
@@ -104,10 +111,6 @@ fun AlarmItem(){
                         tint = Color.White
                     )
                 }
-                Switch(
-                    checked = alarm.isEnable,
-                    onCheckedChange = { onToggle() }
-                )
             }
         }
     }
