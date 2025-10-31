@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.create.CreateAlarm
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
-import com.griffith.shakealarmclockapp.ui.theme.home.AlarmItem
+import com.griffith.shakealarmclockapp.ui.theme.comment.CommentForm
 
 
 @Composable
@@ -25,7 +25,8 @@ fun NavGraph(
             HomeScreen(
                 alarmsListing = viewmodel.alarms,
                 onAddAlarmClick = { navController.navigate(route = "create")},
-                onToggleAlarm = {_alarm -> viewmodel.toggleAlarm(_alarm.id)}
+                onToggleAlarm = {_alarm -> viewmodel.toggleAlarm(_alarm.id)},
+                editAlarm = {navController.navigate(route = "note")}
             )
         }
 
@@ -38,6 +39,13 @@ fun NavGraph(
                     )
                     navController.navigate("home")
                 }
+            )
+        }
+
+
+        composable ("note"){
+            CommentForm(
+
             )
         }
     }

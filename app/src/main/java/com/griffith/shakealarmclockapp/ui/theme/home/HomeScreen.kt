@@ -18,15 +18,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.griffith.shakealarmclockapp.data.Alarm
 
 @Composable
+//@Preview
 fun HomeScreen(
     alarmsListing: List<Alarm>,
     onAddAlarmClick: () -> Unit,
-    onToggleAlarm: (Alarm) -> Unit
+    onToggleAlarm: (Alarm) -> Unit,
+    editAlarm: (Alarm) -> Unit
 ){
     Scaffold(
         floatingActionButton = {
@@ -57,7 +60,8 @@ fun HomeScreen(
                 items(alarmsListing){ _alarm ->
                     AlarmItem(
                         alarm = _alarm,
-                        onToggle = {onToggleAlarm(_alarm)}
+                        onToggle = {onToggleAlarm(_alarm)},
+                        edit = {editAlarm(_alarm)}
                     )
                     Spacer(modifier = Modifier.height(12.dp))
 //                    Alarm(

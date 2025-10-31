@@ -31,16 +31,9 @@ import com.griffith.shakealarmclockapp.data.Alarm
 @Composable
 fun AlarmItem(
     alarm: Alarm,
-    onToggle: () -> Unit
+    onToggle: () -> Unit,
+    edit: () -> Unit
 ){
-//    val alarm = Alarm(
-//        id = "1",
-//        name = "get up",
-//        hour = 7,
-//        minute = 30,
-//        isEnable = true,
-//        days = listOf("Mon", "Tu")
-//    )
     Card (
         modifier = Modifier
             .fillMaxWidth(),
@@ -93,7 +86,7 @@ fun AlarmItem(
                     onCheckedChange = { onToggle() }
                 )
 
-                IconButton(onClick = { }) {
+                IconButton(onClick = {edit() }) {
                     Icon(
                         Icons.Default.MoreVert,
                         contentDescription = "Config",
