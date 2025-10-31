@@ -24,7 +24,7 @@ class AlarmViewModel : ViewModel(){
             if(alarm.isEnable){
                 false
             }else{
-                !true
+                true
             }
         }
     }
