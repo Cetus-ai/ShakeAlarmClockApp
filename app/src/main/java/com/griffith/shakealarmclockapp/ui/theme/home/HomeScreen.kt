@@ -22,11 +22,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.griffith.shakealarmclockapp.data.Alarm
+import com.griffith.shakealarmclockapp.data.Note
 
 @Composable
 //@Preview
 fun HomeScreen(
     alarmsListing: List<Alarm>,
+    noteList: List<Note>,
     onAddAlarmClick: () -> Unit,
     onToggleAlarm: (Alarm) -> Unit,
     editAlarm: (Alarm) -> Unit
@@ -51,6 +53,8 @@ fun HomeScreen(
                 color = Color.White,
                 fontWeight = FontWeight.Bold
             )
+//            Text(noteList[0].text)
+
 
             LazyColumn (
                 modifier = Modifier
@@ -64,15 +68,21 @@ fun HomeScreen(
                         edit = {editAlarm(_alarm)}
                     )
                     Spacer(modifier = Modifier.height(12.dp))
-//                    Alarm(
-//                        alarm.id,
-//                        alarm.name,
-//                        alarm.hour,
-//                        alarm.minute,
-//                        alarm.isEnable,
-//                        days = alarm.days
-//                    )
-//                    Text("id: " + alarm.id + "\nname: " + alarm.name + "\n" + alarm.hour + ":" + alarm.minute + "\nOn/Off: " + alarm.isEnable + "\nDays: " + alarm.days)
+                }
+            }
+
+            LazyColumn (
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
+            ){
+                items(alarmsListing){ _alarm ->
+                    AlarmItem(
+                        alarm = _alarm,
+                        onToggle = {onToggleAlarm(_alarm)},
+                        edit = {editAlarm(_alarm)}
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
                 }
             }
         }
