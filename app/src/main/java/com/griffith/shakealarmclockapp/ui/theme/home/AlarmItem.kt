@@ -2,6 +2,7 @@ package com.griffith.shakealarmclockapp.ui.theme.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -13,11 +14,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,6 +41,7 @@ fun AlarmItem(
     onToggle: () -> Unit,
     edit: () -> Unit
 ){
+    var expanded by remember { mutableStateOf(false) }
     Card (
         modifier = Modifier
             .fillMaxWidth(),
@@ -85,19 +93,39 @@ fun AlarmItem(
                     checked = alarm.isEnable,
                     onCheckedChange = { onToggle() }
                 )
-
-                IconButton(onClick = {edit() }) {
-                    Icon(
-                        Icons.Default.MoreVert,
-                        contentDescription = "Config",
-                        tint = Color.White
-                    )
+                Box(
+                    modifier = Modifier
+                        .padding(16.dp)
+                ){
+                    IconButton(onClick = {expanded = !expanded}) {
+                        Icon(Icons.Default.MoreVert, contentDescription = "Config")
+                    }
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = {expanded = false}
+                    ) {
+                        DropdownMenuItem(
+                            text = {Text("Add Reminder")},
+                            onClick = {edit()}
+                        )
+                        DropdownMenuItem(
+                            text = {Text("Edit Alarm")},
+                            onClick = {}                                    //TODO:
+                        )
+                        DropdownMenuItem(
+                            text = {Text("Remove Alarm")},
+                            onClick = {}                                    //TODO:
+                        )
+                    }
                 }
+//                IconButton(onClick = {edit() }) {
+//                    Icon(
+//                        Icons.Default.MoreVert,
+//                        contentDescription = "Config",
+//                        tint = Color.White
+//                    )
+//                }
             }
         }
     }
-}
-
-private fun RowScope.onToggle() {
-    TODO("Not yet implemented")
 }
