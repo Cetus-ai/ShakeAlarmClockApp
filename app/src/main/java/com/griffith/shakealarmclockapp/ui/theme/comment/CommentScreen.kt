@@ -78,6 +78,7 @@ fun CommentForm(
                         timePickerState.hour,
                         timePickerState.minute
                     )
+                    noteText = ""
                 }) {
                     Text("Save", color = Color.Blue, fontSize = 18.sp)
                 }

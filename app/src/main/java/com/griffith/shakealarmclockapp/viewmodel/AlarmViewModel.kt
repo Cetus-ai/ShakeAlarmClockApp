@@ -1,13 +1,15 @@
 package com.griffith.shakealarmclockapp.viewmodel
 
 import android.provider.ContactsContract
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.griffith.shakealarmclockapp.data.Alarm
 import com.griffith.shakealarmclockapp.data.Note
 
 class AlarmViewModel : ViewModel(){
     val alarms = mutableListOf<Alarm>()
-    val notes = mutableListOf<Note>()
+    val notes = mutableStateListOf<Note>()
 
     fun addAlarm(_name: String, _hour: Int, _minute: Int, _isEnable: Boolean, _days: List<String> ){
         val newAlarm = Alarm(

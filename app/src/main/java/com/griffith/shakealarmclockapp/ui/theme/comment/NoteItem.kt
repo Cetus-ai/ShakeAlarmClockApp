@@ -19,13 +19,13 @@ import com.griffith.shakealarmclockapp.data.Note
 //@Preview
 @Composable
 fun NoteItem(
-    note: Note
+    note: Note,
 ){
-    val note = Note(
-        text = "Time for ScoobySnacks",
-        hour = 3,
-        minute = 0
-    )
+//    val note = Note(
+//        text = "Time for ScoobySnacks",
+//        hour = 3,
+//        minute = 0
+//    )
     Card (
         modifier = Modifier
             .fillMaxWidth()
