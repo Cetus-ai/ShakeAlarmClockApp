@@ -28,7 +28,6 @@ import com.griffith.shakealarmclockapp.data.Note
 //@Preview
 fun HomeScreen(
     alarmsListing: List<Alarm>,
-    noteList: List<Note>,
     onAddAlarmClick: () -> Unit,
     onToggleAlarm: (Alarm) -> Unit,
     editAlarm: (Alarm) -> Unit
@@ -71,20 +70,20 @@ fun HomeScreen(
                 }
             }
 
-            LazyColumn (
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-            ){
-                items(alarmsListing){ _alarm ->
-                    AlarmItem(
-                        alarm = _alarm,
-                        onToggle = {onToggleAlarm(_alarm)},
-                        edit = {editAlarm(_alarm)}
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                }
-            }
+//            LazyColumn (
+//                modifier = Modifier
+//                    .fillMaxSize()
+//                    .padding(paddingValues),
+//            ){
+//                items(alarmsListing){ _alarm ->
+//                    AlarmItem(
+//                        alarm = _alarm,
+//                        onToggle = {onToggleAlarm(_alarm)},
+//                        edit = {editAlarm(_alarm)}
+//                    )
+//                    Spacer(modifier = Modifier.height(12.dp))
+//                }
+//            }
         }
     }
 }

@@ -24,7 +24,6 @@ fun NavGraph(
         composable("home"){
             HomeScreen(
                 alarmsListing = viewmodel.alarms,
-                noteList = viewmodel.notes,
                 onAddAlarmClick = { navController.navigate(route = "create")},
                 onToggleAlarm = {_alarm -> viewmodel.toggleAlarm(_alarm.id)},
                 editAlarm = {navController.navigate(route = "note")}
@@ -46,10 +45,12 @@ fun NavGraph(
 
         composable ("note"){
             CommentForm(
+                noteList = viewmodel.notes,
                 onSafeNoteClick = { text, hour, minute ->
                     viewmodel.addNote(
                         _text = text, _hour = hour, minute
                     )
+//                    navController.navigate("home")
                 },
                 onCancel = {navController.navigate(route = "home")}
             )
