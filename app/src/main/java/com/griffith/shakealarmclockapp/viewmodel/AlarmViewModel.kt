@@ -8,7 +8,7 @@ import com.griffith.shakealarmclockapp.data.Alarm
 import com.griffith.shakealarmclockapp.data.Note
 
 class AlarmViewModel : ViewModel(){
-    val alarms = mutableListOf<Alarm>()
+    val alarms = mutableStateListOf<Alarm>()
     val notes = mutableStateListOf<Note>()
 
     fun addAlarm(_name: String, _hour: Int, _minute: Int, _isEnable: Boolean, _days: List<String> ){
@@ -26,11 +26,10 @@ class AlarmViewModel : ViewModel(){
         val index = alarms.indexOfFirst { it.id == alarmId }
         if (index != -1) {
             val alarm = alarms[index]
-            if(alarm.isEnable){
-                false
-            }else{
-                true
-            }
+            val newState = !alarm.isEnable
+            val updatedAlarm = alarm.copy(isEnable = newState)
+
+            alarms[index] = updatedAlarm
         }
     }
 

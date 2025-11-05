@@ -104,7 +104,7 @@ fun AlarmItem(
                         onDismissRequest = {expanded = false}
                     ) {
                         DropdownMenuItem(
-                            text = {Text("Add Reminder")},
+                            text = {Text("Reminder")},
                             onClick = {edit()}
                         )
                         DropdownMenuItem(
