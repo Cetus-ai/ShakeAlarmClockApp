@@ -23,14 +23,14 @@ fun NoteItem(
     ){
         Row {
             Text(
-                text = String.format("%02d:%02d", note.hour, note.minute),
+                text = String.format("%02d:%02d", note.hour, note.minute),                        //Defines the format in which the time should be displayed in the note
                 fontSize = 30.sp
             )
 
             Spacer(modifier = Modifier.width(16.dp))
 
             Text(
-                text = note.text,
+                text = note.text,                                                                 //During the iteration each note get the necessary Data which is define in Note. Here is the output of the attribute text from Note.
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }

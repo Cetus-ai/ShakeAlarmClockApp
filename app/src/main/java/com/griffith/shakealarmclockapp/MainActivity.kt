@@ -18,11 +18,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme(
                 colorScheme = darkColorScheme(
-                    background = Color(0xFF2C2C2E)
+                    background = Color(0xFF2C2C2E)          //Backgroundcolor of the entire Application
                 )
             ){
-                val navController = rememberNavController()
-                NavGraph(navController = navController)
+                val navController = rememberNavController()        //Creating a navController
+                NavGraph(navController = navController)            //Starting the NavGraph
             }
         }
     }

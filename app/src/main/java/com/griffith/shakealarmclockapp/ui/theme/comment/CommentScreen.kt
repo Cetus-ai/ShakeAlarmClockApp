@@ -36,7 +36,7 @@ import java.util.Calendar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommentForm(
+fun CommentScreen(
     alarmId: String,
     noteList: List<Note>,
     onCancel: () -> Unit,
@@ -62,14 +62,14 @@ fun CommentForm(
                 verticalAlignment = Alignment.CenterVertically
             ){
                 TextButton(onClick = onCancel)
-                { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
+                { Text("Return", color = Color.Blue, fontSize = 18.sp)}                     //Return Button to come back to the HomeScreen
                 Text(
                     text = "Reminder",
                     fontSize = 30.sp,
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
-                TextButton(onClick = {
+                TextButton(onClick = {                                                            //Clicking on the Save-Button create a object from type Note
                     onSafeNoteClick(
                         alarmId,
                         noteText,
@@ -88,12 +88,12 @@ fun CommentForm(
                     .padding(paddingValues),
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
-                TimeInput(
+                TimeInput(                                                                        //A Clock on the right side of the TextBox
                     state = timePickerState,
                     modifier = Modifier
                         .scale(0.8f)
                 )
-                OutlinedTextField(
+                OutlinedTextField(                                                                //The Textbox where the user can write his reminder
                     value = noteText,
                     onValueChange = { noteText = it },
                     label = {Text("Write your reminder her")},
@@ -104,7 +104,7 @@ fun CommentForm(
                     maxLines = 5
                 )
 
-                LazyColumn (
+                LazyColumn (                                                                      //A LazyColumn in which I iterate through a list of notes and list them here
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(paddingValues),

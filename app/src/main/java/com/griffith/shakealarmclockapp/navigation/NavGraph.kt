@@ -5,22 +5,21 @@ import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import androidx.navigation.toRoute
 import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.create.CreateAlarm
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
-import com.griffith.shakealarmclockapp.ui.theme.comment.CommentForm
+import com.griffith.shakealarmclockapp.ui.theme.comment.CommentScreen
 
 
 @Composable
 fun NavGraph(
     navController: NavHostController
 ){
-    val viewmodel = remember { AlarmViewModel() }
+    val viewmodel = remember { AlarmViewModel() }                                                       //Creating a object from type AlarmViewModel to gain access of his functions
 
-    NavHost(navController = navController, startDestination = "home"){
+    NavHost(navController = navController, startDestination = "home"){                                  //From where the NavController will navigate, the Start
 
-        composable("home"){
+        composable("home"){                                                                     //Callback implementation for the HomeScreen
             HomeScreen(
                 alarmsListing = viewmodel.alarms,
                 onAddAlarmClick = { navController.navigate(route = "create")},
@@ -31,7 +30,7 @@ fun NavGraph(
             )
         }
 
-        composable("create"){
+        composable("create"){                                                                   //Callback implementation for the CreateAlarmScreen
             CreateAlarm(
                 onCancel = {navController.navigate(route = "home")},
                 onSafeAlarmClick = { name, hour, minute, _, days ->
@@ -44,9 +43,9 @@ fun NavGraph(
         }
 
 
-        composable ("note/{alarmId}"){ backStackEntry ->
+        composable ("note/{alarmId}"){ backStackEntry ->                                        ////Callback implementation for the CommentScreen
             val alarmId = backStackEntry.arguments?.getString("alarmId") ?: ""
-            CommentForm(
+            CommentScreen(
                 alarmId = alarmId,
                 noteList = viewmodel.filterNotes(alarmId),
                 onSafeNoteClick = { alarmId, text, hour, minute ->

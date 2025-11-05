@@ -58,14 +58,14 @@ fun AlarmItem(
             Column (
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ){
-                Text(
+                Text(                                                                             //Displaying the Namke of the Alarm
                     text = alarm.name,
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
                 Text(
-                    text = String.format("%02d:%02d", alarm.hour, alarm.minute),
+                    text = String.format("%02d:%02d", alarm.hour, alarm.minute),                  //Defines the format in which the time should be displayed in the note
                     fontSize = 30.sp,
                     color = Color.White
                 )
@@ -73,7 +73,7 @@ fun AlarmItem(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier
                 ){
-                    items(alarm.days){ day ->
+                    items(alarm.days){ day ->                                             //iterating through all the selected days and displaying them
                         Text(
                             text = day,
                             color = Color(0xFFFFA500),
@@ -87,10 +87,10 @@ fun AlarmItem(
                 horizontalArrangement = Arrangement.spacedBy((30).dp),
             ){
                 Switch(
-                    checked = alarm.isEnable,
+                    checked = alarm.isEnable,                                                     //The Toggle to turn the alam on/off
                     onCheckedChange = { onToggle() }
                 )
-                Box(
+                Box(                                                                              //A DropdownMenu to add some alarm specific function
                     modifier = Modifier
                         .padding(16.dp)
                 ){

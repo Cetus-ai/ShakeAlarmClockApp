@@ -30,8 +30,7 @@ fun HomeScreen(
     editAlarm: (Alarm) -> Unit
 ){
     Scaffold(
-        floatingActionButton = {
-            val addAlarmClick = null
+        floatingActionButton = {                                                                //The '+' Button
             FloatingActionButton(onClick = onAddAlarmClick ) {
                 Icon(Icons.Filled.Add, "Add Alarm")
             }
@@ -44,15 +43,13 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             Text(
-                text = "Alarms",
+                text = "Alarms",                                                                //The Titel on the Top
                 fontSize = 30.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold
             )
-//            Text(noteList[0].text)
 
-
-            LazyColumn (
+            LazyColumn (                                                                        //A LazyColumn in which I iterate through a list of alarms and list them here
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues),

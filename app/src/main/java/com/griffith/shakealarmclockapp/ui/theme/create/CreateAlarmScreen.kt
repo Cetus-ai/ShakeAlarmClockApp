@@ -37,13 +37,13 @@ fun CreateAlarm(
 ){
 
     var alarmName by remember { mutableStateOf("") }
-    val weekdays = listOf<String>("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")
-    val days = remember { mutableStateListOf<Boolean>().apply {
-        repeat(7) { add(false) }
+    val weekdays = listOf("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")                       //weekdays and days are working parallel to each other (Index[0] weekdays refers to Index[0] in days).
+    val days = remember { mutableStateListOf<Boolean>().apply {                                   //One is saving the days of the Week to display them(weekdays), the other list will safe which day the user choose
+        repeat(7) { add(false) }                                                          //days[0] == true means that the user selected that the alarm shoud ring on monday
     }}
 
-    val timerPickerState = rememberTimePickerState(
-        initialHour = 6,
+    val timerPickerState = rememberTimePickerState(                                               //Define a TimePicker with a default time and respecting the am/pm Version
+        initialHour = 6,                                                                          //The User can edit the time, the default time is just that i can shows something to begin
         initialMinute = 30,
         is24Hour = false
     )
@@ -62,15 +62,15 @@ fun CreateAlarm(
                 verticalAlignment = Alignment.CenterVertically
             ){
                 TextButton(onClick = onCancel)
-                { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
+                { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}                     //When the User realize he dont have to work the next days he comes back to the HomeScreen
                 Text(
                     text = "Set Alarm",
                     fontSize = 30.sp,
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
-                TextButton(onClick = {
-                    val result = mutableListOf<String>()
+                TextButton(onClick = {                                                            //Pressing the Safe Button will Create a Alarm
+                    val result = mutableListOf<String>()                                          //for that i iterate through val days. Based on the booleans in this list i can collect the days where the alarm shoud ring(safed in result)
                     for(i in days.indices){
                         if(days[i]){
                             result.add(weekdays[i])
@@ -91,7 +91,7 @@ fun CreateAlarm(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
-                OutlinedTextField(
+                OutlinedTextField(                                                                //The User can give a Name to his Alarm (Optional)
                     value = alarmName,
                     onValueChange = { alarmName = it },
                     label = {Text("Alarm Name")},
@@ -100,14 +100,14 @@ fun CreateAlarm(
                         .padding(top = 50.dp)
                 )
 
-                TimePicker(state = timerPickerState)
+                TimePicker(state = timerPickerState)                                              //Presenting the TimePicker we created in line 45
 
                 Row (
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ){
-                    weekdays.forEachIndexed { index, day ->
-                    TextButton(onClick = { days[index] = !days[index] }) {
+                    weekdays.forEachIndexed { index, day ->                                       //Iterating through weekdays. As i said they are working parallel to each other
+                    TextButton(onClick = { days[index] = !days[index] }) {                        //I can easily swapping the booleans and colors of each day on and off
                         Text(day,
                             color = if(days[index]) Color(0xFFFFA500) else Color.LightGray,
                             fontSize = 18.sp
