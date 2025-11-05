@@ -5,6 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.create.CreateAlarm
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
@@ -17,7 +18,7 @@ fun NavGraph(
 ){
     //val navController = rememberNavController()
     val viewmodel = remember { AlarmViewModel() }
-
+//    val commentScreen = remember { CommentScreen() }
 
     NavHost(navController = navController, startDestination = "home"){
 
@@ -26,7 +27,9 @@ fun NavGraph(
                 alarmsListing = viewmodel.alarms,
                 onAddAlarmClick = { navController.navigate(route = "create")},
                 onToggleAlarm = {_alarm -> viewmodel.toggleAlarm(_alarm.id)},
-                editAlarm = {navController.navigate(route = "note")}
+                editAlarm = { alarm ->
+                    navController.navigate(route = "note/${alarm.id}")
+                }
             )
         }
 
@@ -43,12 +46,14 @@ fun NavGraph(
         }
 
 
-        composable ("note"){
+        composable ("note/{alarmId}"){ backStackEntry ->
+            val alarmId = backStackEntry.arguments?.getString("alarmId") ?: ""
             CommentForm(
+                alarmId = alarmId,
                 noteList = viewmodel.notes,
-                onSafeNoteClick = { text, hour, minute ->
+                onSafeNoteClick = { alarmId, text, hour, minute ->
                     viewmodel.addNote(
-                        _text = text, _hour = hour, minute
+                        _alarmId = alarmId, _text = text, _hour = hour, minute
                     )
 //                    navController.navigate("home")
                 },

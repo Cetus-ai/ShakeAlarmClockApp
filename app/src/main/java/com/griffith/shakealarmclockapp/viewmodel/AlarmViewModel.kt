@@ -33,8 +33,9 @@ class AlarmViewModel : ViewModel(){
         }
     }
 
-    fun addNote(_text: String, _hour: Int, _minute: Int){
+    fun addNote(_alarmId: String, _text: String, _hour: Int, _minute: Int){
         val note = Note(
+            _alarmId,
             text = _text,
             _hour,
             _minute

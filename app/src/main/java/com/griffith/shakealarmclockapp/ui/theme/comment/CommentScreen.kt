@@ -40,12 +40,12 @@ import java.util.Calendar
 @Composable
 //@Preview(backgroundColor = 0xFF494444, showBackground = true)
 fun CommentForm(
+    alarmId: String,
     noteList: List<Note>,
     onCancel: () -> Unit,
-    onSafeNoteClick: (String, Int, Int) -> Unit
+    onSafeNoteClick: (String, String, Int, Int) -> Unit
 ){
     var noteText by remember { mutableStateOf("") }
-
     val currentTime = Calendar.getInstance()
     val timePickerState = rememberTimePickerState(
         initialHour = currentTime.get(Calendar.HOUR_OF_DAY),
@@ -74,6 +74,7 @@ fun CommentForm(
                 )
                 TextButton(onClick = {
                     onSafeNoteClick(
+                        alarmId,
                         noteText,
                         timePickerState.hour,
                         timePickerState.minute
