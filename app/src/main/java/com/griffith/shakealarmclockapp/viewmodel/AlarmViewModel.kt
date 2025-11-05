@@ -42,4 +42,8 @@ class AlarmViewModel : ViewModel(){
         )
         notes.add(note)
     }
+
+    fun filterNotes(_alarmId: String): List<Note>{
+        return notes.filter { note -> note.alarmId == _alarmId }
+    }
 }

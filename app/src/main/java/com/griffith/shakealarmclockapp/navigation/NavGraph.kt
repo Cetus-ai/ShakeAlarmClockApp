@@ -16,9 +16,7 @@ import com.griffith.shakealarmclockapp.ui.theme.comment.CommentForm
 fun NavGraph(
     navController: NavHostController
 ){
-    //val navController = rememberNavController()
     val viewmodel = remember { AlarmViewModel() }
-//    val commentScreen = remember { CommentScreen() }
 
     NavHost(navController = navController, startDestination = "home"){
 
@@ -50,12 +48,11 @@ fun NavGraph(
             val alarmId = backStackEntry.arguments?.getString("alarmId") ?: ""
             CommentForm(
                 alarmId = alarmId,
-                noteList = viewmodel.notes,
+                noteList = viewmodel.filterNotes(alarmId),
                 onSafeNoteClick = { alarmId, text, hour, minute ->
                     viewmodel.addNote(
                         _alarmId = alarmId, _text = text, _hour = hour, minute
                     )
-//                    navController.navigate("home")
                 },
                 onCancel = {navController.navigate(route = "home")}
             )

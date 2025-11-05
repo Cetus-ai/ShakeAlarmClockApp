@@ -72,7 +72,6 @@ fun AlarmItem(
                 LazyRow (
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier
-                        //.fillMaxWidth()
                 ){
                     items(alarm.days){ day ->
                         Text(
@@ -83,7 +82,6 @@ fun AlarmItem(
                     }
                 }
             }
-//            Spacer(modifier = Modifier.width(100.dp))
             Row (
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy((30).dp),
@@ -117,13 +115,6 @@ fun AlarmItem(
                         )
                     }
                 }
-//                IconButton(onClick = {edit() }) {
-//                    Icon(
-//                        Icons.Default.MoreVert,
-//                        contentDescription = "Config",
-//                        tint = Color.White
-//                    )
-//                }
             }
         }
     }
