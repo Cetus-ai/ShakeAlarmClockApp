@@ -76,14 +76,7 @@ fun SettingScreen(){
                 item {
                     SettingsItem(
                         title = "Default Snooze Time",
-                        subtitle = "Input Box for a int/min"/*OutlinedTextField(
-                        value = /*Default snoozer (5min)*/,
-                        onValueChange = /*Safe the new Input as snoozer duration*/,
-                        label = {Text(/*actual snoozer time*/)},
-                        modifier = Modifier
-                            .padding(bottom = 32.dp)
-                            .padding(top = 50.dp)
-                    )*/,
+                        subtitle = "Input Box for a int/min",
                     )
                 }
 
@@ -108,6 +101,18 @@ fun SettingScreen(){
                         subtitle = "Help me to improve",
                     )
                 }
+
+                item {
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+
+//                item(
+//                    TextButton(
+//                        onClick = {
+//                            val intent = Intent(Intent.ACTION_)
+//                        }
+//                    ) { }
+//                )
             }
         }
     }

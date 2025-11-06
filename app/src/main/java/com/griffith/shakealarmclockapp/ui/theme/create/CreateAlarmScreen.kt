@@ -37,7 +37,7 @@ fun CreateAlarm(
 ){
 
     var alarmName by remember { mutableStateOf("") }
-    val weekdays = listOf("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")                       //weekdays and days are working parallel to each other (Index[0] weekdays refers to Index[0] in days).
+    val weekdays = listOf("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")                               //weekdays and days are working parallel to each other (Index[0] weekdays refers to Index[0] in days).
     val days = remember { mutableStateListOf<Boolean>().apply {                                   //One is saving the days of the Week to display them(weekdays), the other list will safe which day the user choose
         repeat(7) { add(false) }                                                          //days[0] == true means that the user selected that the alarm shoud ring on monday
     }}
