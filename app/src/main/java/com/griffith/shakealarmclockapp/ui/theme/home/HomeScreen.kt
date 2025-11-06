@@ -50,7 +50,10 @@ fun HomeScreen(
                 }
 
                 FloatingActionButton(                                                          //The Setting Button
-                    onClick = {},
+                    onClick = {
+                        val intent = Intent(context, com.griffith.shakealarmclockapp.navigation.SettingsActivity::class.java)
+                        context.startActivity(intent)
+                    },
                     modifier = Modifier
                         .align(Alignment.BottomStart )
                         .padding(start = 30.dp)

@@ -1,6 +1,7 @@
 package com.griffith.shakealarmclockapp.ui.theme.setting
 
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,12 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -49,10 +44,7 @@ fun SettingScreen(){
                 verticalAlignment = Alignment.CenterVertically
             ){
                 TextButton(onClick = {
-//                    Intent(Intent.ACTION_MAIN).also {
-//                        it.`package` =
-//                    }
-//                    val intent = Intent(context, )
+
                 })
                 { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
                 Text(
@@ -95,16 +87,24 @@ fun SettingScreen(){
                     Spacer(modifier = Modifier.height(8.dp))
                 }
 
-                item{
-                    SettingsItem(
-                        title = "Send Feedback",
-                        subtitle = "Help me to improve",
-                    )
+                item {
+                    TextButton(onClick = {
+                        val githubIntent = Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://github.com/Cetus-ai/ShakeAlarmClockApp")
+                        )
+                        context.startActivity(githubIntent)
+                    }) {
+                        SettingsItem(
+                            title = "Visit GitHub",
+                            subtitle = "Check out my projects",
+                        )
+                    }
                 }
 
-                item {
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
+//                item {
+//                    Spacer(modifier = Modifier.height(8.dp))
+//                }
 
 //                item(
 //                    TextButton(
