@@ -1,5 +1,6 @@
 package com.griffith.shakealarmclockapp.ui.theme.home
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,7 +31,15 @@ fun HomeScreen(
     editAlarm: (Alarm) -> Unit
 ){
     Scaffold(
+        Box(
+
+        )
         floatingActionButton = {                                                                //The '+' Button
+            FloatingActionButton(onClick = onAddAlarmClick ) {
+                Icon(Icons.Filled.Add, "Add Alarm")
+            }
+        },
+        floatingActionButton = {                                                                //The Setting-Button
             FloatingActionButton(onClick = onAddAlarmClick ) {
                 Icon(Icons.Filled.Add, "Add Alarm")
             }
