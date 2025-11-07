@@ -94,25 +94,16 @@ fun SettingScreen(){
                             Uri.parse("https://github.com/Cetus-ai/ShakeAlarmClockApp")
                         )
                         context.startActivity(githubIntent)
-                    }) {
+                    },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
                         SettingsItem(
                             title = "Visit GitHub",
-                            subtitle = "Check out my projects",
+                            subtitle = "Help me improve this app",
                         )
                     }
                 }
-
-//                item {
-//                    Spacer(modifier = Modifier.height(8.dp))
-//                }
-
-//                item(
-//                    TextButton(
-//                        onClick = {
-//                            val intent = Intent(Intent.ACTION_)
-//                        }
-//                    ) { }
-//                )
             }
         }
     }

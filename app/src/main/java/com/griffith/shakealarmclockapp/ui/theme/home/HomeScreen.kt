@@ -51,7 +51,10 @@ fun HomeScreen(
 
                 FloatingActionButton(                                                          //The Setting Button
                     onClick = {
-                        val intent = Intent(context, com.griffith.shakealarmclockapp.navigation.SettingsActivity::class.java)
+                        val intent = Intent(                                                   //packageContext = 'Where Am I?', cls = 'Where do i have to go' => explicit intent
+                            context,
+                            com.griffith.shakealarmclockapp.navigation.SettingsActivity::class.java
+                        )
                         context.startActivity(intent)
                     },
                     modifier = Modifier
