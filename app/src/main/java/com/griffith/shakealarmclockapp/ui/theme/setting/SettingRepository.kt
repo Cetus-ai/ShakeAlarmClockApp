@@ -2,22 +2,21 @@ package com.griffith.shakealarmclockapp.ui.theme.setting
 
 
 class SettingsRepository {
+    private var snoozerDuration: Int = 5
+    private var alarmVolume: Float = 50.0F
+    var SnoozeDuration: Int
+        get() {
+            return snoozerDuration
+        }
+        set(value) {
+            snoozerDuration = value
+        }
 
-    fun setSnoozeDuration(minutes: Int) {
-
-    }
-
-    fun getSnoozeDuration(): Int {
-        val tmp: Int = 0
-        return tmp
-    }
-
-    fun setAlarmVolume(volume: Float) {
-
-    }
-
-    fun getAlarmVolume(): Float {
-        val tmp: Float = 0.0F
-        return tmp
-    }
+    var AlarmVolume: Float
+        get() {
+            return alarmVolume
+        }
+        set(value) {
+            alarmVolume = value
+        }
 }

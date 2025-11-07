@@ -61,7 +61,9 @@ fun SettingScreen(){
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
-                TextButton(onClick = {}) {
+                TextButton(onClick = {
+                    
+                }) {
                     Text("Save", color = Color.Blue, fontSize = 18.sp)
                 }
             }
