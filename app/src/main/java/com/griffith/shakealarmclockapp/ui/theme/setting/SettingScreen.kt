@@ -11,10 +11,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,10 +30,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun SettingScreen(){
     val context = LocalContext.current
+    var snoozeTime by remember { mutableStateOf("10") }
+    var alarmVolume by remember { mutableStateOf(50f) }
 
     Scaffold{ paddingValues ->
         Column(
@@ -66,9 +74,14 @@ fun SettingScreen(){
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 item {
-                    SettingsItem(
-                        title = "Default Snooze Time",
-                        subtitle = "Input Box for a int/min",
+//                    SettingsItem(
+//                        title = "Default Snooze Time",
+//                        subtitle = "Input Box for a int/min",
+//                    )
+                    TitelInputbox(
+                        titel = "Snooze Time",
+                        value = snoozeTime,
+                        onValueChange = { snoozeTime = it }
                     )
                 }
 
@@ -77,9 +90,10 @@ fun SettingScreen(){
                 }
 
                 item {
-                    SettingsItem(
-                        title = "Alarm Volume",
-                        subtitle = "a scalebar",
+                    TitelSlidebar(
+                        titel = "Alarm Volume",
+                        value = alarmVolume,
+                        onValueChange = {alarmVolume = it}
                     )
                 }
 
@@ -98,7 +112,7 @@ fun SettingScreen(){
                         modifier = Modifier
                             .fillMaxWidth()
                     ) {
-                        SettingsItem(
+                        TitelSubtitle(
                             title = "Visit GitHub",
                             subtitle = "Help me improve this app",
                         )
