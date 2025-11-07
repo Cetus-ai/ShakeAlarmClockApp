@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 
+//This function provide a SettingItem with a Text and a Textfield for the SnoozerDuration in minutes
 @Composable
 fun TitelInputbox(
     titel: String,
@@ -42,6 +43,7 @@ fun TitelInputbox(
     }
 }
 
+//This function provide a SettingItem with a Text and a Slider for the Alarmvolume
 @ExperimentalMaterial3Api
 @Composable
 fun TitelSlidebar(
@@ -49,7 +51,6 @@ fun TitelSlidebar(
     value: Float,
     onValueChange: (Float) -> Unit
 ){
-    //var sliderPostion by remember { mutableStateOf(0f) }
     Card(
         modifier = Modifier
             .fillMaxSize()
@@ -70,6 +71,7 @@ fun TitelSlidebar(
     }
 }
 
+//This function provide a SettingItem with a Text and a Text to get to the project on GitHub
 @Composable
 fun TitelSubtitle(
     title: String,

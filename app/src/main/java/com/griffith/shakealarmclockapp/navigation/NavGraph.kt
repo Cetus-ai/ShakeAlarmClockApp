@@ -57,11 +57,5 @@ fun NavGraph(
                 onCancel = {navController.navigate(route = "home")}
             )
         }
-
-//        composable (route="setting"){
-//            SettingScreen(
-//                onReturn = { navController.navigate(route = "home") }
-//            )
-//        }
     }
 }

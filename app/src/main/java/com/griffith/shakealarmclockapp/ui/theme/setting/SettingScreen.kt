@@ -33,12 +33,8 @@ import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 @Composable
 fun SettingScreen(
     avm: AlarmViewModel,
-//    onReturn: () -> Unit
 ){
-    val context = LocalContext.current
-//    var snoozeTime by remember { mutableStateOf("10") }
-//    var alarmVolume by remember { mutableStateOf(50f) }
-//    val home = remember { HomeScreen() }
+    val context = LocalContext.current                                                          //The reason like in HomeScreen.kt. This context will help the intent to know where is actually is
 
     Scaffold{ paddingValues ->
         Column(
@@ -54,13 +50,7 @@ fun SettingScreen(
                 verticalAlignment = Alignment.CenterVertically
             ){
                 TextButton(onClick = {
-//                    val intent = Intent(
-//                        context,
-//                        com.griffith.shakealarmclockapp.navigation.SettingsActivity()::class.java
-//                    )
-//                    onReturn
-//                    finishAffinity();
-                    val newContext = context as ComponentActivity
+                    val newContext = context as ComponentActivity                               //I am in a Composable here, intents only work with Components. So i had to convert it into it so that the intent function '.finish()' can be used
                     newContext.finish()
                 })
                 { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
@@ -83,7 +73,7 @@ fun SettingScreen(
                     TitelInputbox(
                         titel = "Snooze Time",
                         value = avm.SnoozeDurationProp.toString(),
-                        onValueChange = { avm.SnoozeDurationProp = it.toIntOrNull()?: 0 }
+                        onValueChange = { avm.SnoozeDurationProp = it.toIntOrNull()?: 0 }       //*1 The Input is directly transfer to the ViewModel. It's gonna be handle as a global setting. Not Alarm wise but Application wise
                     )
                 }
 
@@ -95,7 +85,7 @@ fun SettingScreen(
                     TitelSlidebar(
                         titel = "Alarm Volume",
                         value = avm.AlarmVolumeProp,
-                        onValueChange = {range -> avm.AlarmVolumeProp = range}
+                        onValueChange = {range -> avm.AlarmVolumeProp = range}                  //*1
                     )
                 }
 
@@ -107,7 +97,7 @@ fun SettingScreen(
                     TextButton(onClick = {
                         val githubIntent = Intent(
                             Intent.ACTION_VIEW,
-                            Uri.parse("https://github.com/Cetus-ai/ShakeAlarmClockApp")
+                            Uri.parse("https://github.com/Cetus-ai/ShakeAlarmClockApp")     //This time it's not a explicit intent but a implicit intent. This time im not saying exactly You are in Point A and go to Point B. Im just saying "go to the website, find your way"
                         )
                         context.startActivity(githubIntent)
                     },

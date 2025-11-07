@@ -10,7 +10,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.setting.SettingScreen
-import com.griffith.shakealarmclockapp.ui.theme.setting.SettingsRepository
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 class SettingsActivity : ComponentActivity() {
@@ -20,10 +19,10 @@ class SettingsActivity : ComponentActivity() {
             val avm = remember { AlarmViewModel() }
             MaterialTheme(
                 colorScheme = darkColorScheme(
-                    background = Color(0xFF2C2C2E)          //Background is define in main and works via NavGraph, this is a intent so it need it skipt the navgraph and need his own background color now
+                    background = Color(0xFF2C2C2E)           //Background is define in main and works via NavGraph, this is a intent so it need it skipt the navgraph and need his own background color now
                 )
             ){
-                SettingScreen(avm)
+                SettingScreen(avm)                                  //My Architecture is based on Composables. But Intents works with Components. So i had to implement a class who will help me and the intents to navigate
             }
         }
     }

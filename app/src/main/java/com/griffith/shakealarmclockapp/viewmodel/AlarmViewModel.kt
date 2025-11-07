@@ -14,21 +14,21 @@ class AlarmViewModel : ViewModel(){
 
     var snoozerDuration by mutableStateOf(5)
     var alarmVolume by mutableStateOf(50.0F)
-    var SnoozeDurationProp: Int
+    var SnoozeDurationProp: Int                                                                         //This is the property for the Snoozer duration, the values are set in SettingScreen.kt
         get() {
             return snoozerDuration
         }
         set(value) {
-            print(value)
+            if(value > 5)
+                SnoozeDurationProp = 5
             snoozerDuration = value
         }
 
-    var AlarmVolumeProp: Float
+    var AlarmVolumeProp: Float                                                                          //This is the property for the Alarm Volume, the values are set in SettingScreen.kt
         get() {
             return alarmVolume
         }
         set(value) {
-            print(value)
             alarmVolume = value
         }
 
