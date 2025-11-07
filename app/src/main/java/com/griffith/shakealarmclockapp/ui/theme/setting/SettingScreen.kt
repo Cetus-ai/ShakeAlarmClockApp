@@ -16,19 +16,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.griffith.shakealarmclockapp.ui.theme.setting.SettingsRepository
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 
@@ -77,14 +71,10 @@ fun SettingScreen(avm: AlarmViewModel){
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 item {
-//                    SettingsItem(
-//                        title = "Default Snooze Time",
-//                        subtitle = "Input Box for a int/min",
-//                    )
                     TitelInputbox(
                         titel = "Snooze Time",
-                        value = avm.SnoozeDuration.toString(),
-                        onValueChange = { avm.SnoozeDuration = it.toIntOrNull()?: 0 }
+                        value = avm.SnoozeDurationProp.toString(),
+                        onValueChange = { avm.SnoozeDurationProp = it.toIntOrNull()?: 0 }
                     )
                 }
 
@@ -95,8 +85,8 @@ fun SettingScreen(avm: AlarmViewModel){
                 item {
                     TitelSlidebar(
                         titel = "Alarm Volume",
-                        value = avm.AlarmVolume,
-                        onValueChange = {range -> avm.AlarmVolume = range}
+                        value = avm.AlarmVolumeProp,
+                        onValueChange = {range -> avm.AlarmVolumeProp = range}
                     )
                 }
 

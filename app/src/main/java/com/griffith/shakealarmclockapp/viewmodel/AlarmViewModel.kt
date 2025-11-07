@@ -1,8 +1,9 @@
 package com.griffith.shakealarmclockapp.viewmodel
 
-import android.provider.ContactsContract
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.griffith.shakealarmclockapp.data.Alarm
 import com.griffith.shakealarmclockapp.data.Note
@@ -11,9 +12,9 @@ class AlarmViewModel : ViewModel(){
     val alarms = mutableStateListOf<Alarm>()
     val notes = mutableStateListOf<Note>()
 
-    private var snoozerDuration: Int = 5
-    private var alarmVolume: Float = 50.0F
-    var SnoozeDuration: Int
+    var snoozerDuration by mutableStateOf(5)
+    var alarmVolume by mutableStateOf(50.0F)
+    var SnoozeDurationProp: Int
         get() {
             return snoozerDuration
         }
@@ -22,7 +23,7 @@ class AlarmViewModel : ViewModel(){
             snoozerDuration = value
         }
 
-    var AlarmVolume: Float
+    var AlarmVolumeProp: Float
         get() {
             return alarmVolume
         }
