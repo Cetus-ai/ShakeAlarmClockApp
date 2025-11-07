@@ -47,7 +47,10 @@ fun SettingScreen(avm: AlarmViewModel){
                 verticalAlignment = Alignment.CenterVertically
             ){
                 TextButton(onClick = {
-
+                    val intent = Intent(                                                   //packageContext = 'Where Am I?', cls = 'Where do i have to go' => explicit intent
+                        context,
+                        com.griffith.shakealarmclockapp.navigation.SettingsActivity()::class.java
+                    )
                 })
                 { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
                 Text(
@@ -56,11 +59,6 @@ fun SettingScreen(avm: AlarmViewModel){
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
-                TextButton(onClick = {
-
-                }) {
-                    Text("Save", color = Color.Blue, fontSize = 18.sp)
-                }
             }
 
             LazyColumn (

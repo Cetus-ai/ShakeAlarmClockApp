@@ -8,6 +8,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
+import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.setting.SettingScreen
 import com.griffith.shakealarmclockapp.ui.theme.setting.SettingsRepository
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
@@ -23,6 +24,7 @@ class SettingsActivity : ComponentActivity() {
                 )
             ){
                 SettingScreen(avm)
+                HomeScreen()
             }
         }
     }
