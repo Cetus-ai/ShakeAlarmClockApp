@@ -1,7 +1,9 @@
 package com.griffith.shakealarmclockapp.ui.theme.setting
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +18,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,10 +31,14 @@ import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingScreen(avm: AlarmViewModel){
+fun SettingScreen(
+    avm: AlarmViewModel,
+//    onReturn: () -> Unit
+){
     val context = LocalContext.current
 //    var snoozeTime by remember { mutableStateOf("10") }
 //    var alarmVolume by remember { mutableStateOf(50f) }
+//    val home = remember { HomeScreen() }
 
     Scaffold{ paddingValues ->
         Column(
@@ -47,10 +54,14 @@ fun SettingScreen(avm: AlarmViewModel){
                 verticalAlignment = Alignment.CenterVertically
             ){
                 TextButton(onClick = {
-                    val intent = Intent(                                                   //packageContext = 'Where Am I?', cls = 'Where do i have to go' => explicit intent
-                        context,
-                        com.griffith.shakealarmclockapp.navigation.SettingsActivity()::class.java
-                    )
+//                    val intent = Intent(
+//                        context,
+//                        com.griffith.shakealarmclockapp.navigation.SettingsActivity()::class.java
+//                    )
+//                    onReturn
+//                    finishAffinity();
+                    val newContext = context as ComponentActivity
+                    newContext.finish()
                 })
                 { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
                 Text(

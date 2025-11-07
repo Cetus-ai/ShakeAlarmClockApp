@@ -36,7 +36,6 @@ fun HomeScreen(
     editAlarm: (Alarm) -> Unit
 ){
     val context = LocalContext.current
-    val home = remember { HomeScreen() }
 
     Scaffold(
 

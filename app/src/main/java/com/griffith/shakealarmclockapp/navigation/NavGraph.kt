@@ -9,6 +9,7 @@ import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.create.CreateAlarm
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 import com.griffith.shakealarmclockapp.ui.theme.comment.CommentScreen
+import com.griffith.shakealarmclockapp.ui.theme.setting.SettingScreen
 
 
 @Composable
@@ -56,5 +57,11 @@ fun NavGraph(
                 onCancel = {navController.navigate(route = "home")}
             )
         }
+
+//        composable (route="setting"){
+//            SettingScreen(
+//                onReturn = { navController.navigate(route = "home") }
+//            )
+//        }
     }
 }

@@ -24,7 +24,6 @@ class SettingsActivity : ComponentActivity() {
                 )
             ){
                 SettingScreen(avm)
-                HomeScreen()
             }
         }
     }
