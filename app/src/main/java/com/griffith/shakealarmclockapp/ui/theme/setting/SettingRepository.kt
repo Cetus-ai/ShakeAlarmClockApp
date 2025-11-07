@@ -9,6 +9,7 @@ class SettingsRepository {
             return snoozerDuration
         }
         set(value) {
+            print(value)
             snoozerDuration = value
         }
 
@@ -17,6 +18,7 @@ class SettingsRepository {
             return alarmVolume
         }
         set(value) {
+            print(value)
             alarmVolume = value
         }
 }

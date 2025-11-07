@@ -28,15 +28,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.griffith.shakealarmclockapp.ui.theme.setting.SettingsRepository
+import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun SettingScreen(){
+fun SettingScreen(avm: AlarmViewModel){
     val context = LocalContext.current
-    var snoozeTime by remember { mutableStateOf("10") }
-    var alarmVolume by remember { mutableStateOf(50f) }
+//    var snoozeTime by remember { mutableStateOf("10") }
+//    var alarmVolume by remember { mutableStateOf(50f) }
 
     Scaffold{ paddingValues ->
         Column(
@@ -62,7 +63,7 @@ fun SettingScreen(){
                     fontWeight = FontWeight.Bold
                 )
                 TextButton(onClick = {
-                    
+
                 }) {
                     Text("Save", color = Color.Blue, fontSize = 18.sp)
                 }
@@ -82,8 +83,8 @@ fun SettingScreen(){
 //                    )
                     TitelInputbox(
                         titel = "Snooze Time",
-                        value = snoozeTime,
-                        onValueChange = { snoozeTime = it }
+                        value = avm.SnoozeDuration.toString(),
+                        onValueChange = { avm.SnoozeDuration = it.toIntOrNull()?: 0 }
                     )
                 }
 
@@ -94,8 +95,8 @@ fun SettingScreen(){
                 item {
                     TitelSlidebar(
                         titel = "Alarm Volume",
-                        value = alarmVolume,
-                        onValueChange = {alarmVolume = it}
+                        value = avm.AlarmVolume,
+                        onValueChange = {range -> avm.AlarmVolume = range}
                     )
                 }
 

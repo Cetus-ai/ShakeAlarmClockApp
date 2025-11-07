@@ -11,6 +11,26 @@ class AlarmViewModel : ViewModel(){
     val alarms = mutableStateListOf<Alarm>()
     val notes = mutableStateListOf<Note>()
 
+    private var snoozerDuration: Int = 5
+    private var alarmVolume: Float = 50.0F
+    var SnoozeDuration: Int
+        get() {
+            return snoozerDuration
+        }
+        set(value) {
+            print(value)
+            snoozerDuration = value
+        }
+
+    var AlarmVolume: Float
+        get() {
+            return alarmVolume
+        }
+        set(value) {
+            print(value)
+            alarmVolume = value
+        }
+
     fun addAlarm(_name: String, _hour: Int, _minute: Int, _isEnable: Boolean, _days: List<String> ){    //Creating and adding Alarm to the List alarms after the user created it in CreateAlarmScreen.kt
         val newAlarm = Alarm(
             name = _name,
