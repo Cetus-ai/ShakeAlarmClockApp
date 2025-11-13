@@ -12,8 +12,9 @@ class AlarmReceiver : BroadcastReceiver(){
 
     override fun onReceive(context: Context?, intent: Intent?) {
         val alarmId = intent?.getStringExtra("ALARM_ID")
+        val contextNull = context ?: return
 
-        val alarmIntent = Intent(context, AlarmService::class.java)
+        val alarmIntent = Intent(contextNull, AlarmService::class.java)
         alarmIntent.putExtra("ALARM_ID", alarmId)
         ContextCompat.startForegroundService(context, alarmIntent)
     }

@@ -15,7 +15,7 @@ import com.griffith.shakealarmclockapp.R
 
 class AlarmService : Service(){
 
-    var mediaPlayer = MediaPlayer.create(this, R.raw.air_raid_siren)
+    var mediaPlayer : MediaPlayer? = null
 
     override fun onBind(intent: Intent): IBinder? = null
 
@@ -25,19 +25,23 @@ class AlarmService : Service(){
         ensureChannel()
         startForeground(1, buildNotification(alarmId))
 
-        mediaPlayer.start()
+        mediaPlayer = MediaPlayer.create(this, R.raw.air_raid_siren)
+
+        mediaPlayer?.start()
 
         return START_NOT_STICKY
     }
 
-    fun stopPlayer(){
-        mediaPlayer.stop()
-        mediaPlayer.release()
-    }
+//    fun stopPlayer(){
+//        mediaPlayer?.stop()
+//        mediaPlayer?.release()
+//    }
 
 
     override fun onDestroy() {
-        stopPlayer()
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
         super.onDestroy()
     }
 
