@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import java.util.Calendar
 
 class AlarmScheduler(private val context: Context) {
     val alarmManager = context.getSystemService(AlarmManager::class.java)
@@ -30,9 +31,24 @@ class AlarmScheduler(private val context: Context) {
             context,
             alarmId.hashCode(),
             receiverContact,
-            PendingIntent.FLAG_MUTABLE
+            PendingIntent.FLAG_IMMUTABLE
         )
 
-        alarmManager.setAlarmClock(executeWhenAlarm)
+        val exactAlarmTimer = Calendar.getInstance().apply {
+            set(Calendar.MILLISECOND, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.HOUR, hour)
+        }
+
+        val now = System.currentTimeMillis()
+
+        val triggerAt = exactAlarmTimer.timeInMillis
+        if(triggerAt == now){
+            exactAlarmTimer.add(Calendar.DAY_OF_YEAR, 1)
+        }
+
+        val alarmInfo = AlarmManager.AlarmClockInfo(triggerAt, executeWhenAlarm)
+        alarmManager.setAlarmClock(alarmInfo, executeWhenAlarm)
     }
 }
