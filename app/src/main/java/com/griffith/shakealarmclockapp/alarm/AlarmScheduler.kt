@@ -1,13 +1,17 @@
 package com.griffith.shakealarmclockapp.alarm
 
+import android.app.AlarmManager
+import android.content.Context
 import android.os.Build
 
-class AlarmScheduler {
-//    val context = androidx.compose.ui.platform.LocalContext.current
+class AlarmScheduler(private val context: Context) {
+    val alarmManager = context.getSystemService(AlarmManager::class.java)
 
-    fun checkPermission(){
+    fun checkPermission(): Boolean{
         return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-
+            alarmManager.canScheduleExactAlarms()
+        }else{
+            true
         }
     }
 }
