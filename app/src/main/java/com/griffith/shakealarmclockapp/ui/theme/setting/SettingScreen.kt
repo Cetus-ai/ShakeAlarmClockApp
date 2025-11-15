@@ -1,6 +1,5 @@
 package com.griffith.shakealarmclockapp.ui.theme.setting
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.activity.ComponentActivity
@@ -25,13 +24,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
+import com.griffith.shakealarmclockapp.viewmodel.AlarmAndroidViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingScreen(
-    avm: AlarmViewModel,
+    avm: AlarmAndroidViewModel,
 ){
     val context = LocalContext.current                                                          //The reason like in HomeScreen.kt. This context will help the intent to know where is actually is
 

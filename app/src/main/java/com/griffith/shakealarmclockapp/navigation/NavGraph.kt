@@ -1,5 +1,6 @@
 package com.griffith.shakealarmclockapp.navigation
 
+import android.app.Application
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
@@ -7,16 +8,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.create.CreateAlarm
-import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
+import com.griffith.shakealarmclockapp.viewmodel.AlarmAndroidViewModel
 import com.griffith.shakealarmclockapp.ui.theme.comment.CommentScreen
-import com.griffith.shakealarmclockapp.ui.theme.setting.SettingScreen
 
 
 @Composable
 fun NavGraph(
     navController: NavHostController
 ){
-    val viewmodel = remember { AlarmViewModel() }                                                       //Creating a object from type AlarmViewModel to gain access of his functions
+    val viewmodel = remember { AlarmAndroidViewModel(
+        app = Application.
+    ) }                                                //Creating a object from type AlarmViewModel to gain access of his functions
 
     NavHost(navController = navController, startDestination = "home"){                                  //From where the NavController will navigate, the Start
 

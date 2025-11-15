@@ -7,16 +7,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.compose.rememberNavController
-import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.setting.SettingScreen
-import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
+import com.griffith.shakealarmclockapp.viewmodel.AlarmAndroidViewModel
 
 class SettingsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val avm = remember { AlarmViewModel() }
+            val avm = remember { AlarmAndroidViewModel() }
             MaterialTheme(
                 colorScheme = darkColorScheme(
                     background = Color(0xFF2C2C2E)           //Background is define in main and works via NavGraph, this is a intent so it need it skipt the navgraph and need his own background color now
