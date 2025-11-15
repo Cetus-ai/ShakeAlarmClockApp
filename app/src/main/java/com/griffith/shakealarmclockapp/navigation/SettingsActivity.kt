@@ -9,14 +9,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import com.griffith.shakealarmclockapp.ui.theme.setting.SettingScreen
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class SettingsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val avm: AlarmViewModel = androidx.lifecycle.viewmodel.compose.viewModel(
+            val avm: AlarmViewModel = viewModel(
                 factory = AlarmViewModel.Factory
             )
+//            val avm: AlarmViewModel = androidx.lifecycle.viewmodel.compose.viewModel(
+//                factory = AlarmViewModel.Factory
+//            )
+//            val avm: AlarmViewModel = viewModel(
+//                viewModelStoreOwner = backStackEntry,
+//                factory = AlarmViewModel.Factory
+//            )
             MaterialTheme(
                 colorScheme = darkColorScheme(
                     background = Color(0xFF2C2C2E)           //Background is define in main and works via NavGraph, this is a intent so it need it skipt the navgraph and need his own background color now

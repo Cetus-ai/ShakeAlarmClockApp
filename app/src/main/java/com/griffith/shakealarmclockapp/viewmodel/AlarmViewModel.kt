@@ -12,28 +12,30 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.griffith.shakealarmclockapp.alarm.AlarmScheduler
 import com.griffith.shakealarmclockapp.data.Alarm
 import com.griffith.shakealarmclockapp.data.Note
 
 class AlarmViewModel(
     val app: Application,
     val savedState: SavedStateHandle
-){
+
+): ViewModel(){
     companion object{
         val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(
-                modelClass: Class<T>,
+            override fun <H : ViewModel> create(
+                modelClass: Class<H>,
                 extras: CreationExtras
-            ): T {
-                val application = checkNotNull(extras[APPLICATION_KEY]) as Application
+            ): H {
+                val application = checkNotNull(extras[APPLICATION_KEY]) as Application                  //To build a stable context of a ViewModel and get all dependencys
 
                 val savedStateHandle = extras.createSavedStateHandle()
 
                 return AlarmViewModel(
                     app = application,
                     savedState = savedStateHandle
-                ) as T
+                ) as H
             }
         }
     }
@@ -41,7 +43,7 @@ class AlarmViewModel(
 
     val alarms = mutableStateListOf<Alarm>()
     val notes = mutableStateListOf<Note>()
-
+    val scheduler = AlarmScheduler(app.applicationContext)
     var snoozerDuration by mutableStateOf(5)
     var alarmVolume by mutableStateOf(50.0F)
     var SnoozeDurationProp: Int                                                                         //This is the property for the Snoozer duration, the values are set in SettingScreen.kt
@@ -71,7 +73,7 @@ class AlarmViewModel(
             days = _days
         )
         alarms.add(newAlarm)
-//        scheduler
+        scheduler.scheduleAlarm(newAlarm.id, newAlarm.hour, newAlarm.minute)
     }
 
     fun toggleAlarm(alarmId: String){                                                                   //The ViewModel dont have any direct access to the objects once they are "sended" to other activitys. Like a headquarter in a delivery company.
@@ -80,8 +82,13 @@ class AlarmViewModel(
             val alarm = alarms[index]
             val newState = !alarm.isEnable
             val updatedAlarm = alarm.copy(isEnable = newState)
+            if(updatedAlarm.isEnable){
+                scheduler.scheduleAlarm(updatedAlarm.id, updatedAlarm.hour, updatedAlarm.minute)
+            }else{
 
+            }
             alarms[index] = updatedAlarm
+
         }
     }
 

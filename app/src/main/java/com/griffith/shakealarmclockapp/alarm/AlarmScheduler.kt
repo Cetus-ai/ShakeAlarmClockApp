@@ -38,7 +38,7 @@ class AlarmScheduler(private val context: Context) {
             set(Calendar.MILLISECOND, 0)
             set(Calendar.SECOND, 0)
             set(Calendar.MINUTE, minute)
-            set(Calendar.HOUR, hour)
+            set(Calendar.HOUR_OF_DAY, hour)
         }
 
         val now = System.currentTimeMillis()
