@@ -6,11 +6,39 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.createSavedStateHandle
+import androidx.lifecycle.viewmodel.CreationExtras
 import com.griffith.shakealarmclockapp.data.Alarm
 import com.griffith.shakealarmclockapp.data.Note
 
-class AlarmAndroidViewModel(app: Application) : AndroidViewModel(app){
+class AlarmViewModel(
+    val app: Application,
+    val savedState: SavedStateHandle
+){
+    companion object{
+        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(
+                modelClass: Class<T>,
+                extras: CreationExtras
+            ): T {
+                val application = checkNotNull(extras[APPLICATION_KEY]) as Application
+
+                val savedStateHandle = extras.createSavedStateHandle()
+
+                return AlarmViewModel(
+                    app = application,
+                    savedState = savedStateHandle
+                ) as T
+            }
+        }
+    }
+
+
     val alarms = mutableStateListOf<Alarm>()
     val notes = mutableStateListOf<Note>()
 

@@ -24,13 +24,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.griffith.shakealarmclockapp.viewmodel.AlarmAndroidViewModel
+import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingScreen(
-    avm: AlarmAndroidViewModel,
+    avm: AlarmViewModel,
 ){
     val context = LocalContext.current                                                          //The reason like in HomeScreen.kt. This context will help the intent to know where is actually is
 
