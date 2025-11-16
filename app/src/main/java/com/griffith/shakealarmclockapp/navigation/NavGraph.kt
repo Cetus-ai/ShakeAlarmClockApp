@@ -11,13 +11,14 @@ import com.griffith.shakealarmclockapp.ui.theme.home.HomeScreen
 import com.griffith.shakealarmclockapp.ui.theme.create.CreateAlarm
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 import com.griffith.shakealarmclockapp.ui.theme.comment.CommentScreen
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
 fun NavGraph(
     navController: NavHostController
 ){
-    val viewmodel: AlarmViewModel = androidx.lifecycle.viewmodel.compose.viewModel(
+    val viewmodel: AlarmViewModel = viewModel(
         factory = AlarmViewModel.Factory
     )
 //    val app = LocalContext.current.applicationContext as Application

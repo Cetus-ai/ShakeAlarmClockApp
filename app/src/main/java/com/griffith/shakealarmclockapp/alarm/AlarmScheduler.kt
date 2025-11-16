@@ -51,4 +51,18 @@ class AlarmScheduler(private val context: Context) {
         val alarmInfo = AlarmManager.AlarmClockInfo(triggerAt, executeWhenAlarm)
         alarmManager.setAlarmClock(alarmInfo, executeWhenAlarm)
     }
+
+    fun cancelAlarm(alarmId: String){
+        val receiverContact = Intent(context, AlarmReceiver::class.java)
+            .putExtra("ALARM_ID", alarmId)
+
+        val executeWhenAlarm = PendingIntent.getBroadcast(
+            context,
+            alarmId.hashCode(),
+            receiverContact,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+       alarmManager.cancel(executeWhenAlarm)
+    }
 }

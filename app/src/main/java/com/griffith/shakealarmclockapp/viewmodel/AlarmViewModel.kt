@@ -85,7 +85,7 @@ class AlarmViewModel(
             if(updatedAlarm.isEnable){
                 scheduler.scheduleAlarm(updatedAlarm.id, updatedAlarm.hour, updatedAlarm.minute)
             }else{
-
+                scheduler.cancelAlarm(alarmId)
             }
             alarms[index] = updatedAlarm
 
