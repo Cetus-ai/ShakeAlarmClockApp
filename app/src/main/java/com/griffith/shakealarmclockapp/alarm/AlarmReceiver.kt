@@ -4,19 +4,43 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat
+import java.util.Calendar
 
 class AlarmReceiver : BroadcastReceiver(){
 
 //    val context = LocalContext.current
 
 
-    override fun onReceive(context: Context?, intent: Intent?) {
-        val alarmId = intent?.getStringExtra("ALARM_ID")
-        val contextNull = context ?: return
+    override fun onReceive(context: Context, intent: Intent) {
+        val alarmId = intent.getStringExtra("ALARM_ID") ?: return
+        val hour = intent.getIntExtra("HOUR", 0)
+        val minute = intent.getIntExtra("MINUTE", 0)
+        val selectedDays = intent.getIntArrayExtra("SELECTED_DAYS")
 
-        val alarmIntent = Intent(contextNull, AlarmService::class.java)
+        val alarmIntent = Intent(context, AlarmService::class.java)
         alarmIntent.putExtra("ALARM_ID", alarmId)
         ContextCompat.startForegroundService(context, alarmIntent)
+
+        if (selectedDays != null) {
+            if (selectedDays.isNotEmpty()) {
+                val scheduler = AlarmScheduler(context)
+                val daysList  = selectedDays.map { calendarDayToString(it) }
+
+                scheduler.scheduleAlarm(alarmId, hour, minute, daysList)
+            }
+        }
     }
 
+    private fun calendarDayToString(day: Int): String {
+        return when(day) {
+            Calendar.MONDAY -> "Mo"
+            Calendar.TUESDAY -> "Tu"
+            Calendar.WEDNESDAY -> "We"
+            Calendar.THURSDAY -> "Th"
+            Calendar.FRIDAY -> "Fr"
+            Calendar.SATURDAY -> "Sa"
+            Calendar.SUNDAY -> "Su"
+            else -> ""
+        }
+    }
 }
