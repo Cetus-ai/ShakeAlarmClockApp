@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat
+import com.griffith.shakealarmclockapp.wakeup.WakeUpManager
 import java.util.Calendar
 
 class AlarmReceiver : BroadcastReceiver(){
@@ -29,6 +30,11 @@ class AlarmReceiver : BroadcastReceiver(){
                 scheduler.scheduleAlarm(alarmId, hour, minute, daysList)
             }
         }
+
+        val wakeupManager = Intent(context, WakeUpManager::class.java).apply {
+            putExtra("ALARM_ID", alarmId)
+        }
+        context.startActivity(wakeupManager)
     }
 
     private fun calendarDayToString(day: Int): String {
