@@ -5,7 +5,9 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import kotlinx.coroutines.selects.select
 import java.util.Calendar
+import kotlin.collections.toIntArray
 
 class AlarmScheduler(private val context: Context) {
     val alarmManager = context.getSystemService(AlarmManager::class.java)
@@ -18,7 +20,7 @@ class AlarmScheduler(private val context: Context) {
         }
     }
 
-    fun scheduleAlarm(alarmId: String, hour: Int, minute: Int){
+    fun scheduleAlarm(alarmId: String, hour: Int, minute: Int, days: List<String>){
         if(!checkPermission())
             return
 
@@ -26,6 +28,7 @@ class AlarmScheduler(private val context: Context) {
             .putExtra("ALARM_ID", alarmId)
             .putExtra("HOUR", hour)
             .putExtra("MINUTE", minute)
+            .putExtra("SELECTED_DAYS", ArrayList(days))
 
         val executeWhenAlarm = PendingIntent.getBroadcast(
             context,

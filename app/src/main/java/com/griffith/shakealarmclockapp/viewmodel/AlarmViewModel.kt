@@ -1,5 +1,6 @@
 package com.griffith.shakealarmclockapp.viewmodel
 
+import android.R
 import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -73,7 +74,7 @@ class AlarmViewModel(
             days = _days
         )
         alarms.add(newAlarm)
-        scheduler.scheduleAlarm(newAlarm.id, newAlarm.hour, newAlarm.minute)
+        scheduler.scheduleAlarm(newAlarm.id, newAlarm.hour, newAlarm.minute, _days)
     }
 
     fun toggleAlarm(alarmId: String){                                                                   //The ViewModel dont have any direct access to the objects once they are "sended" to other activitys. Like a headquarter in a delivery company.
@@ -82,8 +83,9 @@ class AlarmViewModel(
             val alarm = alarms[index]
             val newState = !alarm.isEnable
             val updatedAlarm = alarm.copy(isEnable = newState)
+            val days = alarm.days
             if(updatedAlarm.isEnable){
-                scheduler.scheduleAlarm(updatedAlarm.id, updatedAlarm.hour, updatedAlarm.minute)
+                scheduler.scheduleAlarm(updatedAlarm.id, updatedAlarm.hour, updatedAlarm.minute, days)
             }else{
                 scheduler.cancelAlarm(alarmId)
             }
