@@ -9,12 +9,7 @@ import com.griffith.shakealarmclockapp.data.Note
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 import kotlin.time.Duration
 
-class WakeUpManager {
-//    - Loads alarm data
-//    - Loads reminders
-//    - Starts sensors
-//    - Manages snooze
-
+class WakeUpManager{
     companion object{
         var noteList: List<Note> = emptyList()
         fun startWakeUp(context: Context, alarmId: String){

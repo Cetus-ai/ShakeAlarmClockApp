@@ -1,8 +1,6 @@
 package com.griffith.shakealarmclockapp.wakeup
 
-import android.os.Build
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,13 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
-
-//- needed to Navigate to WakeUpScreen
 class WakeUpActivity : ComponentActivity() {
-//    - Displays UI (screen)
-//    - Reminder list
-//    - Shake animation
-//    - Dismiss/Snooze buttons
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -28,7 +20,11 @@ class WakeUpActivity : ComponentActivity() {
             WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
         )
 
+
         setContent {
+            val viewModel: AlarmViewModel = viewModel(
+                factory = AlarmViewModel.Factory
+            )
 
             MaterialTheme(
                 colorScheme = darkColorScheme(
@@ -36,7 +32,16 @@ class WakeUpActivity : ComponentActivity() {
                 )
             ) {
                 WakeUpScreen(
-
+                    alarmId = intent.getStringExtra("ALARM_ID"),
+                    viewModel = viewModel,
+                    onDismiss = {
+                        WakeUpManager.dismissAlarm(context = this)
+                        finish()
+                    },
+                    onSnooze = { duration ->
+                        WakeUpManager.snoozeAlarm(this, duration)
+                        finish()
+                    }
                 )
             }
         }
