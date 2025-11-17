@@ -20,6 +20,7 @@ class AlarmService : Service(){
     override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        android.util.Log.d("AlarmService", "Service gestartet!")
         val alarmId = intent.getStringExtra("ALARM_ID")
 
         ensureChannel()

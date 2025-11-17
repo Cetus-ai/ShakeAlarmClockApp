@@ -52,6 +52,11 @@
             android:name=".navigation.SettingsActivity"
             android:exported="false" >
         </activity>
+        <activity
+            android:name=".wakeup.WakeUpActivity"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:exported="false" />
     </application>
 
 </manifest>

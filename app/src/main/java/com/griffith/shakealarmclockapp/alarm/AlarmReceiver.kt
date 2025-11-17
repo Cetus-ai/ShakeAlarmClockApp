@@ -13,6 +13,7 @@ class AlarmReceiver : BroadcastReceiver(){
 
 
     override fun onReceive(context: Context, intent: Intent) {
+        android.util.Log.d("AlarmReceiver", "larm empfangen!")
         val alarmId = intent.getStringExtra("ALARM_ID") ?: return
         val hour = intent.getIntExtra("HOUR", 0)
         val minute = intent.getIntExtra("MINUTE", 0)
@@ -31,10 +32,11 @@ class AlarmReceiver : BroadcastReceiver(){
             }
         }
 
-        val wakeupManager = Intent(context, WakeUpManager::class.java).apply {
-            putExtra("ALARM_ID", alarmId)
-        }
-        context.startActivity(wakeupManager)
+//        val wakeupManager = Intent(context, WakeUpManager::class.java).apply {
+//            putExtra("ALARM_ID", alarmId)
+//        }
+//        context.startActivity(wakeupManager)
+        WakeUpManager.startWakeUp(context, alarmId)
     }
 
     private fun calendarDayToString(day: Int): String {

@@ -12,6 +12,7 @@ import kotlin.time.Duration
 class WakeUpManager{
     companion object{
         var noteList: List<Note> = emptyList()
+
         fun startWakeUp(context: Context, alarmId: String){
             val intent = Intent(context, WakeUpActivity::class.java).apply {
                 putExtra("ALARM_ID", alarmId)
@@ -21,7 +22,7 @@ class WakeUpManager{
         }
 
         fun loadReminders(alarmId: String, viewModel: AlarmViewModel): List<Note>{
-            noteList = viewModel.notes
+            noteList = viewModel.notes.filter { true }
             return noteList
         }
 
