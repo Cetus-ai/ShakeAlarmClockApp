@@ -111,6 +111,6 @@ class AlarmScheduler(private val context: Context) {
 
             exactAlarmTimer.add(Calendar.DAY_OF_YEAR, 1)
         }
-        return exactAlarmTimer.timeInMillis             //<-- shoud never reach this, if so, something went wrong
+        return exactAlarmTimer.timeInMillis             //<-- shoud never reach this, if so, the user didn't select any days
     }
 }
