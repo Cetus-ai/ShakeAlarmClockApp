@@ -8,9 +8,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.griffith.shakealarmclockapp.sensor.ShakeDetector
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 class WakeUpActivity : ComponentActivity() {
+
+    var shakeDetector: ShakeDetector? = null
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -20,6 +23,10 @@ class WakeUpActivity : ComponentActivity() {
             WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
         )
 
+        shakeDetector = ShakeDetector {
+            WakeUpManager.dismissAlarm(context = this)
+            finish()
+        }
 
         setContent {
             val viewModel: AlarmViewModel = viewModel(

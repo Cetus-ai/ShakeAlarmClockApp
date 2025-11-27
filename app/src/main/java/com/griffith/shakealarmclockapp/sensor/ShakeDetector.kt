@@ -1,13 +1,21 @@
 package com.griffith.shakealarmclockapp.sensor
 
+import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
-import android.hardware.SensorListener
 import android.hardware.SensorManager
+import com.griffith.shakealarmclockapp.wakeup.WakeUpActivity
+import java.lang.Math.sqrt
+import java.lang.StrictMath.sqrt
 import kotlin.math.sqrt
 
-class ShakeDetector : SensorEventListener {
+class ShakeDetector(
+    private val onShake: () -> Unit
+) : SensorEventListener {
+
+    val shakeSensitivity = 15f
+
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         TODO("Not yet implemented")
     }
@@ -19,5 +27,8 @@ class ShakeDetector : SensorEventListener {
 
         val acceleration = sqrt(x * x + y * y + z * z) - SensorManager.GRAVITY_EARTH
 
+        if(acceleration > shakeSensitivity){
+            onShake()
+        }
     }
 }
