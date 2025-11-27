@@ -1,0 +1,85 @@
+package com.griffith.shakealarmclockapp.sensor
+
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import kotlin.math.sqrt
+
+// Quelle: GeeksforGeeks + Stack Overflow
+class ShakeDetector(
+    context: Context,
+    private val onShake: () -> Unit
+) : SensorEventListener {
+
+    // SensorManager holen (wie in allen Tutorials)
+    private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    private val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    
+    // Quelle: Stack Overflow (MIN_TIME_BETWEEN_SHAKES)
+    private var lastShakeTime = 0L
+    private val shakeThreshold = 15f  // Quelle: Stack Overflow (SHAKE_THRESHOLD)
+    private val shakeInterval = 1000L
+
+    // Quelle: GitHub (start/stop Pattern)
+    fun start() {
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+    fun stop() {
+        sensorManager.unregisterListener(this)
+    }
+
+    // Quelle: GeeksforGeeks (onSensorChanged Implementation)
+    override fun onSensorChanged(event: SensorEvent) {
+        val x = event.values[0]
+        val y = event.values[1]
+        val z = event.values[2]
+
+        // Quelle: GeeksforGeeks (sqrt Berechnung)
+        val acceleration = sqrt(x * x + y * y + z * z) - SensorManager.GRAVITY_EARTH
+
+        val now = System.currentTimeMillis()
+
+        // Quelle: Stack Overflow (Time-Check Pattern)
+        if (acceleration > shakeThreshold && now - lastShakeTime > shakeInterval) {
+            lastShakeTime = now
+            onShake()
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+}
+
+class WakeUpActivity : ComponentActivity() {
+
+    private var shakeDetector: ShakeDetector? = null
+
+    override fun onCreate(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
+
+        window.addFlags(
+            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+        )
+
+        // Quelle: GitHub (onCreate Pattern)
+        shakeDetector = ShakeDetector(this) {
+            WakeUpManager.dismissAlarm(this)
+            finish()
+        }
+        
+        shakeDetector?.start()
+
+        setContent {
+            // ... dein bestehender Code
+        }
+    }
+
+    // Quelle: GitHub (onDestroy Pattern)
+    override fun onDestroy() {
+        shakeDetector?.stop()
+        super.onDestroy()
+    }
+}

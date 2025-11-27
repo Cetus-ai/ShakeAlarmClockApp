@@ -12,9 +12,16 @@ import com.griffith.shakealarmclockapp.navigation.NavGraph
 import com.griffith.shakealarmclockapp.utils.PermissionHelper
 
 class MainActivity : ComponentActivity() {
+
+    lateinit var permissionHelper: PermissionHelper
+
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        permissionHelper = PermissionHelper(this)
+        permissionHelper.frageNachBerechtigungen()
+
         setContent {
             MaterialTheme(
                 colorScheme = darkColorScheme(
