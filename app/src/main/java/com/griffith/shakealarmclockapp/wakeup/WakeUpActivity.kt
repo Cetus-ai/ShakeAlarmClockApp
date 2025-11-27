@@ -29,7 +29,6 @@ class WakeUpActivity : ComponentActivity() {
             finish()
         }
         shakeDetector?.start()
-        shakeDetector?.stop()
 
         setContent {
             val viewModel: AlarmViewModel = viewModel(
@@ -55,5 +54,10 @@ class WakeUpActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    override fun onDestroy() {
+        shakeDetector?.stop()
+        super.onDestroy()
     }
 }
