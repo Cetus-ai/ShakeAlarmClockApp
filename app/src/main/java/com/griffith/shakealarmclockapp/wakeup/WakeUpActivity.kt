@@ -1,5 +1,6 @@
 package com.griffith.shakealarmclockapp.wakeup
 
+import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
@@ -23,10 +24,12 @@ class WakeUpActivity : ComponentActivity() {
             WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
         )
 
-        shakeDetector = ShakeDetector {
+        shakeDetector = ShakeDetector(context = this) {
             WakeUpManager.dismissAlarm(context = this)
             finish()
         }
+        shakeDetector?.start()
+        shakeDetector?.stop()
 
         setContent {
             val viewModel: AlarmViewModel = viewModel(

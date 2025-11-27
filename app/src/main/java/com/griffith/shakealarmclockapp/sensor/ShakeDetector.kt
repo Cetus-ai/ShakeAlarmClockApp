@@ -6,29 +6,45 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import com.griffith.shakealarmclockapp.wakeup.WakeUpActivity
+import kotlinx.serialization.descriptors.setSerialDescriptor
 import java.lang.Math.sqrt
 import java.lang.StrictMath.sqrt
 import kotlin.math.sqrt
 
 class ShakeDetector(
+    context: Context,
     private val onShake: () -> Unit
 ) : SensorEventListener {
 
     val shakeSensitivity = 15f
+    val shakeInterval = 1000L
+    val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    private val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         TODO("Not yet implemented")
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-        val x = event?.values[0]
-        val y = event?.values[1]
-        val z = event?.values[2]
+
+        if (event == null) return
+
+        val x = event.values[0]
+        val y = event.values[1]
+        val z = event.values[2]
 
         val acceleration = sqrt(x * x + y * y + z * z) - SensorManager.GRAVITY_EARTH
 
         if(acceleration > shakeSensitivity){
             onShake()
         }
+    }
+
+    fun start(){
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+    fun stop(){
+        sensorManager.unregisterListener(this)
     }
 }
