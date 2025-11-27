@@ -13,7 +13,7 @@ class AlarmReceiver : BroadcastReceiver(){
 
 
     override fun onReceive(context: Context, intent: Intent) {
-        android.util.Log.d("AlarmReceiver", "Alarm empfangen!")
+        android.util.Log.d("AlarmReceiver", "Alarm received!")
         val alarmId = intent.getStringExtra("ALARM_ID") ?: return
         val hour = intent.getIntExtra("HOUR", 0)
         val minute = intent.getIntExtra("MINUTE", 0)

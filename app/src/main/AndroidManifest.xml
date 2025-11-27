@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -28,15 +29,6 @@
             android:exported="false"
             tools:ignore="MissingClass" />
 
-<!--        <receiver android:name=".alarm.BootReceiver"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true"-->
-<!--            tools:ignore="MissingClass">-->
-<!--            <intent-filter android:priority="1000">-->
-<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
-
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -44,7 +36,6 @@
             android:theme="@style/Theme.ShakeAlarmClockApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

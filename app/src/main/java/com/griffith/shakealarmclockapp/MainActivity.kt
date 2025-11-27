@@ -9,7 +9,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.griffith.shakealarmclockapp.navigation.NavGraph
-
+import com.griffith.shakealarmclockapp.utils.PermissionHelper
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
