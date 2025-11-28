@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         permissionHelper = PermissionHelper(this)
-        permissionHelper.frageNachBerechtigungen()
+        permissionHelper.askingPermission()
 
         setContent {
             MaterialTheme(

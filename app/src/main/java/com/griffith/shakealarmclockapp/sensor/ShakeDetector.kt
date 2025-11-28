@@ -5,10 +5,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import com.griffith.shakealarmclockapp.wakeup.WakeUpActivity
-import kotlinx.serialization.descriptors.setSerialDescriptor
-import java.lang.Math.sqrt
-import java.lang.StrictMath.sqrt
 import kotlin.math.sqrt
 
 class ShakeDetector(
@@ -17,7 +13,7 @@ class ShakeDetector(
 ) : SensorEventListener {
 
     val shakeSensitivity = 15f
-    val shakeInterval = 1000L
+//    val shakeInterval = 1000L
     val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 

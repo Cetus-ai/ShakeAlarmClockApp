@@ -18,15 +18,15 @@ class PermissionHelper(private val activity: ComponentActivity) {
         ActivityResultContracts.RequestPermission()
     ) {}
 
-    fun frageNachBerechtigungen() {
+    fun askingPermission() {
 
         if (Build.VERSION.SDK_INT >= 33) {
-            val hatBerechtigung = ContextCompat.checkSelfPermission(
+            val hasPermission = ContextCompat.checkSelfPermission(
                 activity,
                 Manifest.permission.POST_NOTIFICATIONS
             ) == PackageManager.PERMISSION_GRANTED
 
-            if (!hatBerechtigung) {
+            if (!hasPermission) {
                 notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
