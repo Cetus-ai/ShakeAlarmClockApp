@@ -23,6 +23,9 @@ class AlarmViewModel(
 
 ): ViewModel(){
     companion object{
+        // Factory to create AlarmViewModel with required dependencies:
+        // - Application: provides context for AlarmScheduler (and incoming database)
+        // - SavedStateHandle: preserves state across process death
         val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <H : ViewModel> create(

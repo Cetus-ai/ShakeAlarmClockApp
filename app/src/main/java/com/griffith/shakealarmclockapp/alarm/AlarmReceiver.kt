@@ -11,7 +11,7 @@ class AlarmReceiver : BroadcastReceiver(){
 
 //    val context = LocalContext.current
 
-
+    // Handles alarm: start AlarmSerivce (Noticiation and Sound) and schedule next alarm
     override fun onReceive(context: Context, intent: Intent) {
         android.util.Log.d("AlarmReceiver", "Alarm received!")
         val alarmId = intent.getStringExtra("ALARM_ID") ?: return
@@ -32,13 +32,12 @@ class AlarmReceiver : BroadcastReceiver(){
             }
         }
 
-//        val wakeupManager = Intent(context, WakeUpManager::class.java).apply {
-//            putExtra("ALARM_ID", alarmId)
-//        }
-//        context.startActivity(wakeupManager)
         WakeUpManager.startWakeUp(context, alarmId)
     }
 
+    // Converts Calendar constants back to string format for scheduleAlarm()
+    //    That seems unnecessarily complicated to me
+    //    It must have been the work of an old and very tired Roman
     private fun calendarDayToString(day: Int): String {
         return when(day) {
             Calendar.MONDAY -> "Mo"

@@ -16,6 +16,7 @@ class WakeUpActivity : ComponentActivity() {
 
     var shakeDetector: ShakeDetector? = null
 
+    // Sets up alarm screen: unlock flags, shake detection, and UI
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
 

@@ -12,8 +12,8 @@ import kotlin.collections.toIntArray
 
 class AlarmScheduler(private val context: Context) {
     val alarmManager = context.getSystemService(AlarmManager::class.java)
-//    val dayList: ArrayList<Int> = null;
 
+    //Checking if the deivce has Android 12 or higher (Android has changed the ploicey regarding exactAlarms after version 11.)
     fun checkPermission(): Boolean{
         return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
             alarmManager.canScheduleExactAlarms()
@@ -22,6 +22,7 @@ class AlarmScheduler(private val context: Context) {
         }
     }
 
+    //Schedules the alarm for the next possible time
     fun scheduleAlarm(alarmId: String, hour: Int, minute: Int, days: List<String>){
 
         val selectedDays = daysToCalender(days)
@@ -42,28 +43,17 @@ class AlarmScheduler(private val context: Context) {
             PendingIntent.FLAG_IMMUTABLE
         )
 
-//        val exactAlarmTimer = Calendar.getInstance().apply {
-//            set(Calendar.MILLISECOND, 0)
-//            set(Calendar.SECOND, 0)
-//            set(Calendar.MINUTE, minute)
-//            set(Calendar.HOUR_OF_DAY, hour)
-//        }
-
-
         val triggerAt = getNextAlarmTimer(
             hour,
             minute,
             selectedDays.toCollection(ArrayList())
         )
 
-//        if(triggerAt == now){
-//            exactAlarmTimer.add(Calendar.DAY_OF_YEAR, 1)
-//        }
-
         val alarmInfo = AlarmManager.AlarmClockInfo(triggerAt, executeWhenAlarm)
         alarmManager.setAlarmClock(alarmInfo, executeWhenAlarm)
     }
 
+    //Deleting planed alarm
     fun cancelAlarm(alarmId: String){
         val receiverContact = Intent(context, AlarmReceiver::class.java)
             .putExtra("ALARM_ID", alarmId)
@@ -78,6 +68,7 @@ class AlarmScheduler(private val context: Context) {
        alarmManager.cancel(executeWhenAlarm)
     }
 
+    //Translating the Weekdays strings into android Weekdays
     fun daysToCalender(days: List<String>): IntArray{
         val daysMap = mapOf(
             "Mo" to Calendar.MONDAY,
@@ -92,6 +83,7 @@ class AlarmScheduler(private val context: Context) {
         return days.mapNotNull { daysMap[it] }.toIntArray()
     }
 
+    //Iterate through the selected days, checking which day the alarm will have to ring
     fun getNextAlarmTimer(hour: Int, minute: Int, selectedDays: ArrayList<Int>): Long{
         val exactAlarmTimer = Calendar.getInstance().apply {
             set(Calendar.MILLISECOND, 0)

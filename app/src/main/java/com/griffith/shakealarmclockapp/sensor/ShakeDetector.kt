@@ -17,8 +17,11 @@ class ShakeDetector(
     val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
+    //inherits from SensorEventListener, the fun onAccuracyChanged must occur, but I don't need it
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
+    //When the mobile phone is accelerated, it calculates the exact acceleration - GRAVITY_EARTH
+    //if acceleration is heigher then sensitivity = shake
     override fun onSensorChanged(event: SensorEvent?) {
 
         if (event == null) return
@@ -34,10 +37,12 @@ class ShakeDetector(
         }
     }
 
+    //Add Listener to the accelerometer
     fun start(){
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
+    //Stop the Sensor
     fun stop(){
         sensorManager.unregisterListener(this)
     }

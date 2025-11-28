@@ -19,6 +19,7 @@ class AlarmService : Service(){
 
     override fun onBind(intent: Intent): IBinder? = null
 
+    //Call the notifaction and create the alarmsound
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         android.util.Log.d("AlarmService", "Service started!")
         val alarmId = intent.getStringExtra("ALARM_ID")
@@ -38,7 +39,7 @@ class AlarmService : Service(){
 //        mediaPlayer?.release()
 //    }
 
-
+    //Reset mediaplayer
     override fun onDestroy() {
         mediaPlayer?.stop()
         mediaPlayer?.release()
@@ -46,6 +47,7 @@ class AlarmService : Service(){
         super.onDestroy()
     }
 
+    //Notification: Icon, Text
     fun buildNotification(alarmId: String?): Notification {
         return NotificationCompat.Builder(this, "alarm")
             .setContentTitle("Alarm")
@@ -54,6 +56,7 @@ class AlarmService : Service(){
             .build()
     }
 
+    //Channel for Notification: Name, Importance
     fun ensureChannel(){
         if(Build.VERSION.SDK_INT < 26)
             return

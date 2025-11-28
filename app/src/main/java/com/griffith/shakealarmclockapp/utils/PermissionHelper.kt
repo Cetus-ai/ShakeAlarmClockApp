@@ -18,6 +18,7 @@ class PermissionHelper(private val activity: ComponentActivity) {
         ActivityResultContracts.RequestPermission()
     ) {}
 
+    //Just like with the permissions for exactAlarm, the app needs permission to display notifications.
     fun askingPermission() {
 
         if (Build.VERSION.SDK_INT >= 33) {
@@ -28,16 +29,6 @@ class PermissionHelper(private val activity: ComponentActivity) {
 
             if (!hasPermission) {
                 notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            }
-        }
-
-        if (Build.VERSION.SDK_INT >= 31) {
-            val alarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-            if (!alarmManager.canScheduleExactAlarms()) {
-                val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
-                intent.data = Uri.parse("package:${activity.packageName}")
-                activity.startActivity(intent)
             }
         }
     }
