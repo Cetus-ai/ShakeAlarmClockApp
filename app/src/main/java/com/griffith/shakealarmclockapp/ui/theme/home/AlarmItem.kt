@@ -1,10 +1,13 @@
 package com.griffith.shakealarmclockapp.ui.theme.home
 
+import android.R
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
@@ -26,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -33,13 +37,18 @@ import androidx.compose.ui.unit.sp
 import com.griffith.shakealarmclockapp.data.Alarm
 
 @SuppressLint("DefaultLocale")
-//@Preview
 @Composable
 fun AlarmItem(
     alarm: Alarm,
     onToggle: () -> Unit,
     edit: () -> Unit
 ){
+    val gradient = Brush.horizontalGradient(
+        listOf(
+            Color(0xFF9D4EDD),
+            Color(0xFF5A67D8)
+        )
+    )
     var expanded by remember { mutableStateOf(false) }
     Card (
         modifier = Modifier
@@ -48,71 +57,80 @@ fun AlarmItem(
             containerColor = Color.Gray,
         )
     ){
-        Row (
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(35.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .fillMaxSize()
+                .background(brush = gradient)
+                .padding(20.dp)
         ){
-            Column (
-                verticalArrangement = Arrangement.spacedBy(10.dp)
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(35.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ){
-                Text(                                                                             //Displaying the Namke of the Alarm
-                    text = alarm.name,
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
-                Text(
-                    text = String.format("%02d:%02d", alarm.hour, alarm.minute),                  //Defines the format in which the time should be displayed in the note
-                    fontSize = 30.sp,
-                    color = Color.White
-                )
-                LazyRow (
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier
+                Column (
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
                 ){
-                    items(alarm.days){ day ->                                             //iterating through all the selected days and displaying them
-                        Text(
-                            text = day,
-                            color = Color(0xFFFFA500),
-                            fontSize = 16.sp,
-                        )
+                    Text(                                                                             //Displaying the Namke of the Alarm
+                        text = alarm.name,
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                    Text(
+                        text = String.format("%02d:%02d", alarm.hour, alarm.minute),                  //Defines the format in which the time should be displayed in the note
+                        fontSize = 30.sp,
+                        color = Color.White
+                    )
+                    LazyRow (
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier
+                    ){
+                        items(alarm.days){ day ->                                             //iterating through all the selected days and displaying them
+                            Text(
+                                text = day,
+//                                color = Color(0xFFFFA500),
+                                color = Color.White,
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
                     }
                 }
-            }
-            Row (
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy((30).dp),
-            ){
-                Switch(
-                    checked = alarm.isEnable,                                                     //The Toggle to turn the alam on/off
-                    onCheckedChange = { onToggle() }
-                )
-                Box(                                                                              //A DropdownMenu to add some alarm specific function
-                    modifier = Modifier
-                        .padding(16.dp)
+                Row (
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy((30).dp),
                 ){
-                    IconButton(onClick = {expanded = !expanded}) {
-                        Icon(Icons.Default.MoreVert, contentDescription = "Config")
-                    }
-                    DropdownMenu(
-                        expanded = expanded,
-                        onDismissRequest = {expanded = false}
-                    ) {
-                        DropdownMenuItem(
-                            text = {Text("Reminder")},
-                            onClick = {edit()}
-                        )
-                        DropdownMenuItem(
-                            text = {Text("Edit Alarm")},
-                            onClick = {}                                    //TODO:
-                        )
-                        DropdownMenuItem(
-                            text = {Text("Remove Alarm")},
-                            onClick = {}                                    //TODO:
-                        )
+                    Switch(
+                        checked = alarm.isEnable,                                                     //The Toggle to turn the alam on/off
+                        onCheckedChange = { onToggle() }
+                    )
+                    Box(                                                                              //A DropdownMenu to add some alarm specific function
+                        modifier = Modifier
+                            .padding(16.dp)
+                    ){
+                        IconButton(onClick = {expanded = !expanded}) {
+                            Icon(Icons.Default.MoreVert, contentDescription = "Config")
+                        }
+                        DropdownMenu(
+                            expanded = expanded,
+                            onDismissRequest = {expanded = false},
+                        ) {
+                            DropdownMenuItem(
+                                text = {Text("Reminder")},
+                                onClick = {edit()}
+                            )
+                            DropdownMenuItem(
+                                text = {Text("Edit Alarm")},
+                                onClick = {}                                    //TODO:
+                            )
+                            DropdownMenuItem(
+                                text = {Text("Remove Alarm")},
+                                onClick = {}                                    //TODO:
+                            )
+                        }
                     }
                 }
             }
