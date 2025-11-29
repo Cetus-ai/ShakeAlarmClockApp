@@ -5,9 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import kotlinx.coroutines.selects.select
 import java.util.Calendar
-import java.util.stream.Collectors.mapping
 import kotlin.collections.toIntArray
 
 class AlarmScheduler(private val context: Context) {

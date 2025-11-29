@@ -13,7 +13,6 @@ class ShakeDetector(
 ) : SensorEventListener {
 
     val shakeSensitivity = 15f
-//    val shakeInterval = 1000L
     val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 

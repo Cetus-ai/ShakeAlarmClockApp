@@ -51,11 +51,6 @@ fun SettingScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ){
-//                TextButton(onClick = {
-//                    val newContext = context as ComponentActivity                               //I am in a Composable here, intents only work with Components. So i had to convert it into it so that the intent function '.finish()' can be used
-//                    newContext.finish()
-//                })
-//                { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
                 Button(
                     onClick = {
                         val newContext = context as ComponentActivity                               //I am in a Composable here, intents only work with Components. So i had to convert it into it so that the intent function '.finish()' can be used

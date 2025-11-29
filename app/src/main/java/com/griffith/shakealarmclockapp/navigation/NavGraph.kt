@@ -1,9 +1,6 @@
 package com.griffith.shakealarmclockapp.navigation
 
-import android.app.Application
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable

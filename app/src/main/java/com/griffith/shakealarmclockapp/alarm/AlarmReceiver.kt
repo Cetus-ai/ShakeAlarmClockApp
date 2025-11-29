@@ -9,8 +9,6 @@ import java.util.Calendar
 
 class AlarmReceiver : BroadcastReceiver(){
 
-//    val context = LocalContext.current
-
     // Handles alarm: start AlarmSerivce (Noticiation and Sound) and schedule next alarm
     override fun onReceive(context: Context, intent: Intent) {
         android.util.Log.d("AlarmReceiver", "Alarm received!")

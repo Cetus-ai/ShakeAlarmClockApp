@@ -1,6 +1,5 @@
 package com.griffith.shakealarmclockapp.ui.theme.comment
 
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,7 +18,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimeInput
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
@@ -66,14 +64,6 @@ fun CommentScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ){
-//                TextButton(onClick = onCancel)
-//                { Text("Return", color = Color.Blue, fontSize = 18.sp)}                     //Return Button to come back to the HomeScreen
-//                Text(
-//                    text = "Reminder",
-//                    fontSize = 30.sp,
-//                    color = Color.White,
-//                    fontWeight = FontWeight.Bold
-//                )
                 Button(
                     onClick = onCancel,
                     modifier = Modifier
@@ -92,17 +82,6 @@ fun CommentScreen(
                         fontWeight = FontWeight.Bold
                     )
                 }
-//                TextButton(onClick = {                                                            //Clicking on the Save-Button create a object from type Note
-//                    onSafeNoteClick(
-//                        alarmId,
-//                        noteText,
-//                        timePickerState.hour,
-//                        timePickerState.minute
-//                    )
-//                    noteText = ""
-//                }) {
-//                    Text("Save", color = Color.Blue, fontSize = 18.sp)
-//                }
                 Button(
                     onClick = {                                                                     //Clicking on the Save-Button create a object from type Note
                         onSafeNoteClick(

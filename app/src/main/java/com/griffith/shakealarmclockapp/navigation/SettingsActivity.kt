@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import com.griffith.shakealarmclockapp.ui.theme.setting.SettingScreen
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel

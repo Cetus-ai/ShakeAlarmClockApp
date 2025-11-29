@@ -2,8 +2,6 @@ package com.griffith.shakealarmclockapp.wakeup
 
 import android.content.Context
 import android.content.Intent
-import android.text.BoringLayout
-import androidx.activity.ComponentActivity
 import com.griffith.shakealarmclockapp.alarm.AlarmService
 import com.griffith.shakealarmclockapp.data.Note
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel

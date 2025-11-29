@@ -11,13 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-//@Preview
 //WakeUpScreen when the alarm ring
 fun WakeUpScreen(
     alarmId: String?,
