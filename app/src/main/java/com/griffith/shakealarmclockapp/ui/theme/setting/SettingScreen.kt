@@ -11,7 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -47,11 +51,32 @@ fun SettingScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                TextButton(onClick = {
-                    val newContext = context as ComponentActivity                               //I am in a Composable here, intents only work with Components. So i had to convert it into it so that the intent function '.finish()' can be used
-                    newContext.finish()
-                })
-                { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
+//                TextButton(onClick = {
+//                    val newContext = context as ComponentActivity                               //I am in a Composable here, intents only work with Components. So i had to convert it into it so that the intent function '.finish()' can be used
+//                    newContext.finish()
+//                })
+//                { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}
+                Button(
+                    onClick = {
+                        val newContext = context as ComponentActivity                               //I am in a Composable here, intents only work with Components. So i had to convert it into it so that the intent function '.finish()' can be used
+                        newContext.finish()
+                    },
+                    modifier = Modifier
+                        .width(85.dp)
+                        .height(40.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF9D4EDD),
+                        contentColor = Color.White
+                    ),
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                ) {
+                    Text(
+                        text = "Cancel",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
                 Text(
                     text = "Settings",
                     fontSize = 30.sp,
