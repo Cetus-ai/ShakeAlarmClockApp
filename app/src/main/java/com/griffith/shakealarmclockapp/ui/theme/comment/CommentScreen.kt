@@ -1,5 +1,6 @@
 package com.griffith.shakealarmclockapp.ui.theme.comment
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,8 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -61,24 +66,68 @@ fun CommentScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                TextButton(onClick = onCancel)
-                { Text("Return", color = Color.Blue, fontSize = 18.sp)}                     //Return Button to come back to the HomeScreen
-                Text(
-                    text = "Reminder",
-                    fontSize = 30.sp,
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold
-                )
-                TextButton(onClick = {                                                            //Clicking on the Save-Button create a object from type Note
-                    onSafeNoteClick(
-                        alarmId,
-                        noteText,
-                        timePickerState.hour,
-                        timePickerState.minute
+//                TextButton(onClick = onCancel)
+//                { Text("Return", color = Color.Blue, fontSize = 18.sp)}                     //Return Button to come back to the HomeScreen
+//                Text(
+//                    text = "Reminder",
+//                    fontSize = 30.sp,
+//                    color = Color.White,
+//                    fontWeight = FontWeight.Bold
+//                )
+                Button(
+                    onClick = onCancel,
+                    modifier = Modifier
+                        .width(85.dp)
+                        .height(40.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF9D4EDD),
+                        contentColor = Color.White
+                    ),
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                ) {
+                    Text(
+                        text = "Cancel",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
                     )
-                    noteText = ""
-                }) {
-                    Text("Save", color = Color.Blue, fontSize = 18.sp)
+                }
+//                TextButton(onClick = {                                                            //Clicking on the Save-Button create a object from type Note
+//                    onSafeNoteClick(
+//                        alarmId,
+//                        noteText,
+//                        timePickerState.hour,
+//                        timePickerState.minute
+//                    )
+//                    noteText = ""
+//                }) {
+//                    Text("Save", color = Color.Blue, fontSize = 18.sp)
+//                }
+                Button(
+                    onClick = {                                                                     //Clicking on the Save-Button create a object from type Note
+                        onSafeNoteClick(
+                            alarmId,
+                            noteText,
+                            timePickerState.hour,
+                            timePickerState.minute
+                        )
+                        noteText = ""
+                    },
+                    modifier = Modifier
+                        .width(85.dp)
+                        .height(40.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF9D4EDD),
+                        contentColor = Color.White
+                    ),
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                ) {
+                    Text(
+                        text = "Save",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
             }
 
