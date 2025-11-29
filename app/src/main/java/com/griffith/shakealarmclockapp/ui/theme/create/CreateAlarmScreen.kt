@@ -7,6 +7,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -56,13 +60,19 @@ fun CreateAlarm(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Row (
+            Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
-            ){
+            ) {
                 TextButton(onClick = onCancel)
-                { Text("Cancel", color = Color.Blue, fontSize = 18.sp)}                     //When the User realize he dont have to work the next days he comes back to the HomeScreen
+                {
+                    Text(
+                        "Cancel",
+                        color = Color.Blue,
+                        fontSize = 18.sp
+                    )
+                }                     //When the User realize he dont have to work the next days he comes back to the HomeScreen
                 Text(
                     text = "Set Alarm",
                     fontSize = 30.sp,
@@ -70,9 +80,10 @@ fun CreateAlarm(
                     fontWeight = FontWeight.Bold
                 )
                 TextButton(onClick = {                                                            //Pressing the Safe Button will Create a Alarm
-                    val result = mutableListOf<String>()                                          //for that i iterate through val days. Based on the booleans in this list i can collect the days where the alarm shoud ring(safed in result)
-                    for(i in days.indices){
-                        if(days[i]){
+                    val result =
+                        mutableListOf<String>()                                          //for that i iterate through val days. Based on the booleans in this list i can collect the days where the alarm shoud ring(safed in result)
+                    for (i in days.indices) {
+                        if (days[i]) {
                             result.add(weekdays[i])
                         }
                     }
@@ -87,14 +98,14 @@ fun CreateAlarm(
                     Text("Save", color = Color.Blue, fontSize = 18.sp)
                 }
             }
-            Column (
+            Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
-            ){
+            ) {
                 OutlinedTextField(                                                                //The User can give a Name to his Alarm (Optional)
                     value = alarmName,
                     onValueChange = { alarmName = it },
-                    label = {Text("Alarm Name")},
+                    label = { Text("Alarm Name") },
                     modifier = Modifier
                         .padding(bottom = 32.dp)
                         .padding(top = 50.dp)
@@ -102,19 +113,31 @@ fun CreateAlarm(
 
                 TimePicker(state = timerPickerState)                                              //Presenting the TimePicker we created in line 45
 
-                Row (
+                Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
-                ){
+                ) {
                     weekdays.forEachIndexed { index, day ->                                       //Iterating through weekdays. As i said they are working parallel to each other
-                    TextButton(onClick = { days[index] = !days[index] }) {                        //I can easily swapping the booleans and colors of each day on and off
-                        Text(day,
-                            color = if(days[index]) Color(0xFFFFA500) else Color.LightGray,
-                            fontSize = 18.sp
-                        ) }
+                        Button(
+                            onClick = { days[index] = !days[index] },
+                            modifier = Modifier.size(45.dp),
+                            shape = RoundedCornerShape(15.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if(days[index]) Color(0xFFFFA500) else Color(0xFF9D4EDD),
+                                contentColor = Color.White
+                            ),
+                            contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                        ) {
+                            Text(
+                                text = day.substring(0, 2),
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
                     }
                 }
             }
         }
     }
 }
+//I can easily swapping the booleans and colors of each day on and off
