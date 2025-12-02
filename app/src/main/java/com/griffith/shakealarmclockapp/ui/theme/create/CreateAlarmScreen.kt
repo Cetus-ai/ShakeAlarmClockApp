@@ -3,6 +3,7 @@ package com.griffith.shakealarmclockapp.ui.theme.create
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,21 +32,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.griffith.shakealarmclockapp.data.Alarm
 
-
-@SuppressLint("InvalidColorHexValue")
+@SuppressLint("InvalidColorHexValue", "RememberReturnType")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateAlarm(
     onCancel: () -> Unit,
-    onSafeAlarmClick: (String, Int, Int, Boolean, List<String>) -> Unit
+    onSafeAlarmClick: (String, Int, Int, Boolean, List<String>) -> Unit,
+    existingAlarm: Alarm? = null
 ){
 
     var alarmName by remember { mutableStateOf("") }
     val weekdays = listOf("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")                               //weekdays and days are working parallel to each other (Index[0] weekdays refers to Index[0] in days).
-    val days = remember { mutableStateListOf<Boolean>().apply {                                   //One is saving the days of the Week to display them(weekdays), the other list will safe which day the user choose
-        repeat(7) { add(false) }                                                          //days[0] == true means that the user selected that the alarm shoud ring on monday
-    }}
+    val days = remember {                                                                         //One is saving the days of the Week to display them(weekdays), the other list will safe which day the user choose
+        mutableStateListOf<Boolean>().apply {                                                     //days[0] == true means that the user selected that the alarm shoud ring on monday
+            repeat(7) { index ->
+                val isSelected = existingAlarm?.days?.contains(weekdays[index]) == true
+                add(isSelected)
+            }
+        }
+    }
 
     val timerPickerState = rememberTimePickerState(                                               //Define a TimePicker with a default time and respecting the am/pm Version
         initialHour = 6,                                                                          //The User can edit the time, the default time is just that i can shows something to begin
@@ -76,7 +83,7 @@ fun CreateAlarm(
                         containerColor = Color(0xFF9D4EDD),
                         contentColor = Color.White
                     ),
-                    contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                    contentPadding = PaddingValues(0.dp)
                 ) {
                     Text(
                         text = "Cancel",
@@ -114,7 +121,7 @@ fun CreateAlarm(
                         containerColor = Color(0xFF9D4EDD),
                         contentColor = Color.White
                     ),
-                    contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                    contentPadding = PaddingValues(0.dp)
                 ) {
                     Text(
                         text = "Save",
@@ -151,7 +158,7 @@ fun CreateAlarm(
                                 containerColor = if(days[index]) Color(0xFFFFA500) else Color(0xFF9D4EDD),
                                 contentColor = Color.White
                             ),
-                            contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                            contentPadding = PaddingValues(0.dp)
                         ) {
                             Text(
                                 text = day.substring(0, 2),
