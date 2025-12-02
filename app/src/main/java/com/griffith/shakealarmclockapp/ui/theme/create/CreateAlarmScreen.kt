@@ -43,7 +43,7 @@ fun CreateAlarm(
     existingAlarm: Alarm? = null
 ){
 
-    var alarmName by remember { mutableStateOf("") }
+    var alarmName by remember { mutableStateOf(existingAlarm?.name ?: "") }
     val weekdays = listOf("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")                               //weekdays and days are working parallel to each other (Index[0] weekdays refers to Index[0] in days).
     val days = remember {                                                                         //One is saving the days of the Week to display them(weekdays), the other list will safe which day the user choose
         mutableStateListOf<Boolean>().apply {                                                     //days[0] == true means that the user selected that the alarm shoud ring on monday
@@ -55,8 +55,8 @@ fun CreateAlarm(
     }
 
     val timerPickerState = rememberTimePickerState(                                               //Define a TimePicker with a default time and respecting the am/pm Version
-        initialHour = 6,                                                                          //The User can edit the time, the default time is just that i can shows something to begin
-        initialMinute = 30,
+        initialHour = existingAlarm?.hour ?: 6,                                                                          //The User can edit the time, the default time is just that i can shows something to begin
+        initialMinute = existingAlarm?.minute ?: 0,
         is24Hour = false
     )
 
