@@ -28,12 +28,15 @@ fun NavGraph(
                 alarmsListing = viewmodel.alarms,
                 onAddAlarmClick = { navController.navigate(route = "create")},
                 onToggleAlarm = {_alarm -> viewmodel.toggleAlarm(_alarm.id)},
-                editAlarm = { alarm ->
+                addNode = { alarm ->
                     navController.navigate(route = "note/${alarm.id}")
                 },
                 deleteAlarm = { alarm ->
                     viewmodel.deleteAlarm(_alarmId = alarm.id)
                     navController.navigate(route = "home")
+                },
+                editAlarm = { alarm ->
+                    navController.navigate(route = "edit/${alarm.id}")
                 }
             )
         }
@@ -63,6 +66,28 @@ fun NavGraph(
                 },
                 onCancel = {navController.navigate(route = "home")}
             )
+        }
+
+        composable ("edit/{alarmId}"){ backStackEntry ->
+            val alarmId = backStackEntry.arguments?.getString("alarmId") ?: ""
+            val alarm = viewmodel.alarms.find { it.id == alarmId }
+
+            if (alarm != null) {
+                CreateAlarm(
+                    existingAlarm = alarm,
+                    onCancel = {navController.navigate(route = "home")},
+                    onSafeAlarmClick = { name, hour, minute, _, days ->
+                        viewmodel.updateAlarm(
+                            _alarmId = alarmId,
+                            _name = name,
+                            _hour = hour,
+                            _minute = minute,
+                            _days = days
+                        )
+                        navController.navigate("home")
+                    }
+                )
+            }
         }
     }
 }

@@ -31,6 +31,7 @@ fun HomeScreen(
     alarmsListing: List<Alarm>,
     onAddAlarmClick: () -> Unit,
     onToggleAlarm: (Alarm) -> Unit,
+    addNode: (Alarm) -> Unit,
     editAlarm: (Alarm) -> Unit,
     deleteAlarm: (Alarm) -> Unit
 ){
@@ -89,6 +90,7 @@ fun HomeScreen(
                     AlarmItem(
                         alarm = _alarm,
                         onToggle = {onToggleAlarm(_alarm)},
+                        note = {addNode(_alarm)},
                         edit = {editAlarm(_alarm)},
                         delete = {deleteAlarm(_alarm)}
                     )

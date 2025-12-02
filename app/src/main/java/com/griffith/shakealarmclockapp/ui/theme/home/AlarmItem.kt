@@ -40,6 +40,7 @@ import com.griffith.shakealarmclockapp.data.Alarm
 fun AlarmItem(
     alarm: Alarm,
     onToggle: () -> Unit,
+    note: () -> Unit,
     edit: () -> Unit,
     delete: () -> Unit
 ){
@@ -120,11 +121,11 @@ fun AlarmItem(
                         ) {
                             DropdownMenuItem(
                                 text = {Text("Reminder")},
-                                onClick = {edit()}
+                                onClick = {note()}
                             )
                             DropdownMenuItem(
                                 text = {Text("Edit Alarm")},
-                                onClick = {}                                    //TODO:
+                                onClick = {edit()}
                             )
                             DropdownMenuItem(
                                 text = {Text("Remove Alarm")},

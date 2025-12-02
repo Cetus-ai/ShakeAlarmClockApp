@@ -117,4 +117,26 @@ class AlarmViewModel(
             alarms.removeAt(index)
         }
     }
+
+    fun updateAlarm(_alarmId: String, _name: String, _hour: Int, _minute: Int, _days: List<String>){
+        val index = alarms.indexOfFirst { it.id == _alarmId }
+        if(index != -1){
+            val oldAlarm = alarms[index]
+
+            scheduler.cancelAlarm(_alarmId)
+
+            val updatedAlarm = oldAlarm.copy(
+                name = _name,
+                hour = _hour,
+                minute = _minute,
+                days = _days
+            )
+
+            alarms[index] = updatedAlarm
+
+            if(updatedAlarm.isEnable){
+                scheduler.scheduleAlarm(updatedAlarm.id, updatedAlarm.hour, updatedAlarm.minute, _days)
+            }
+        }
+    }
 }
