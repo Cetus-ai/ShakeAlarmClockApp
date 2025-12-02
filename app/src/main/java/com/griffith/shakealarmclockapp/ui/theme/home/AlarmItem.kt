@@ -40,7 +40,8 @@ import com.griffith.shakealarmclockapp.data.Alarm
 fun AlarmItem(
     alarm: Alarm,
     onToggle: () -> Unit,
-    edit: () -> Unit
+    edit: () -> Unit,
+    delete: () -> Unit
 ){
     val gradient = Brush.horizontalGradient(
         listOf(
@@ -127,7 +128,7 @@ fun AlarmItem(
                             )
                             DropdownMenuItem(
                                 text = {Text("Remove Alarm")},
-                                onClick = {}                                    //TODO:
+                                onClick = {delete()}
                             )
                         }
                     }

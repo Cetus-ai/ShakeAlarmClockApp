@@ -31,7 +31,8 @@ fun HomeScreen(
     alarmsListing: List<Alarm>,
     onAddAlarmClick: () -> Unit,
     onToggleAlarm: (Alarm) -> Unit,
-    editAlarm: (Alarm) -> Unit
+    editAlarm: (Alarm) -> Unit,
+    deleteAlarm: (Alarm) -> Unit
 ){
     val context = LocalContext.current
 
@@ -88,7 +89,8 @@ fun HomeScreen(
                     AlarmItem(
                         alarm = _alarm,
                         onToggle = {onToggleAlarm(_alarm)},
-                        edit = {editAlarm(_alarm)}
+                        edit = {editAlarm(_alarm)},
+                        delete = {deleteAlarm(_alarm)}
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                 }

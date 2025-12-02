@@ -30,6 +30,10 @@ fun NavGraph(
                 onToggleAlarm = {_alarm -> viewmodel.toggleAlarm(_alarm.id)},
                 editAlarm = { alarm ->
                     navController.navigate(route = "note/${alarm.id}")
+                },
+                deleteAlarm = { alarm ->
+                    viewmodel.deleteAlarm(_alarmId = alarm.id)
+                    navController.navigate(route = "home")
                 }
             )
         }

@@ -108,4 +108,13 @@ class AlarmViewModel(
     fun filterNotes(_alarmId: String): List<Note>{                                                      //iterating through all the created notes and checking the id. With .filter, i return a List<Note> of all the notes which matched the alarmId
         return notes.filter { note -> note.alarmId == _alarmId }
     }
+
+    fun deleteAlarm(_alarmId: String){
+        val index = alarms.indexOfFirst { it.id == _alarmId }
+        if (index != -1) {
+//            val alarm = alarms[index]
+            scheduler.cancelAlarm(_alarmId)
+            alarms.removeAt(index)
+        }
+    }
 }
