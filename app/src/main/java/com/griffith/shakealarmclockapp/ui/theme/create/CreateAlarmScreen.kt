@@ -55,7 +55,7 @@ fun CreateAlarm(
     }
 
     val timerPickerState = rememberTimePickerState(                                               //Define a TimePicker with a default time and respecting the am/pm Version
-        initialHour = existingAlarm?.hour ?: 6,                                                                          //The User can edit the time, the default time is just that i can shows something to begin
+        initialHour = existingAlarm?.hour ?: 6,                                                   //The User can edit the time, the default time is just that i can shows something to begin
         initialMinute = existingAlarm?.minute ?: 0,
         is24Hour = false
     )
