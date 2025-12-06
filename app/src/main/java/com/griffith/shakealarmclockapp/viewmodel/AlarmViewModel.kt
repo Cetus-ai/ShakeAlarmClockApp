@@ -57,9 +57,11 @@ class AlarmViewModel(
             val result = repository.loadAllAlarms()
             result.onSuccess { loadAlarms ->
                 alarms.clear()
+                notes.clear()
                 alarms.addAll(loadAlarms)
-
                 loadAlarms.forEach { alarm ->
+                    notes.addAll(alarm.notes)
+
                     if(alarm.isEnable){
                         scheduler.scheduleAlarm(alarm.id, alarm.hour, alarm.minute, alarm.days)
                     }
@@ -70,7 +72,11 @@ class AlarmViewModel(
 
     fun safeAlarms(){                                                                               //safe Alarms in FireBase
         viewModelScope.launch {                                                                     //starting as a background Task
-            repository.saveAllAlarm(alarms.toList())
+            val alarmsWithNotes = alarms.map { alarm ->
+                val alarmNotes = notes.filter { it.alarmId == alarm.id }
+                alarm.copy(notes = alarmNotes)
+            }
+            repository.saveAllAlarm(alarmsWithNotes)
         }
     }
 
@@ -103,7 +109,7 @@ class AlarmViewModel(
             minute = _minute,
             isEnable = _isEnable,
             days = _days,
-            notes = emptyList() //TODO: probably only a temporary solution
+            notes = emptyList()
         )
         alarms.add(newAlarm)
         scheduler.scheduleAlarm(newAlarm.id, newAlarm.hour, newAlarm.minute, _days)
@@ -126,6 +132,7 @@ class AlarmViewModel(
             alarms[index] = updatedAlarm
 
         }
+        safeAlarms()
     }
 
     fun addNote(_alarmId: String, _text: String, _hour: Int, _minute: Int){                             //Creating and adding Note to the List notes after the user created it in CommentScreen.kt
@@ -136,6 +143,7 @@ class AlarmViewModel(
             _minute
         )
         notes.add(note)
+        safeAlarms()
     }
 
     fun filterNotes(_alarmId: String): List<Note>{                                                      //iterating through all the created notes and checking the id. With .filter, i return a List<Note> of all the notes which matched the alarmId
@@ -149,6 +157,7 @@ class AlarmViewModel(
             scheduler.cancelAlarm(_alarmId)
             alarms.removeAt(index)
         }
+        safeAlarms()
     }
 
     fun updateAlarm(_alarmId: String, _name: String, _hour: Int, _minute: Int, _days: List<String>){
@@ -171,5 +180,6 @@ class AlarmViewModel(
                 scheduler.scheduleAlarm(updatedAlarm.id, updatedAlarm.hour, updatedAlarm.minute, _days)
             }
         }
+        safeAlarms()
     }
 }
