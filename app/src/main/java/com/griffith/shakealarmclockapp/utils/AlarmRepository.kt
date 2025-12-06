@@ -33,6 +33,7 @@ class AlarmRepository {
                     days = (alarmMap["days"] as? List<String>) ?: emptyList(),
                     notes = (alarmMap["notes"] as? List<Map<String, Any>>)?.map { noteMap ->
                         Note(
+                            alarmId = alarmMap["id"] as? String ?: "",
                             text = noteMap["text"] as? String ?: "",
                             hour = (noteMap["hour"] as? Long)?.toInt() ?: 0,
                             minute = (noteMap["minute"] as? Long)?.toInt() ?: 0

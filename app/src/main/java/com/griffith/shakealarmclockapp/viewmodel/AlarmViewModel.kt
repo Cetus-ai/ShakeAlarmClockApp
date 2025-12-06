@@ -72,7 +72,8 @@ class AlarmViewModel(
             hour = _hour,
             minute = _minute,
             isEnable = _isEnable,
-            days = _days
+            days = _days,
+            notes = emptyList() //TODO: probably only a temporary solution
         )
         alarms.add(newAlarm)
         scheduler.scheduleAlarm(newAlarm.id, newAlarm.hour, newAlarm.minute, _days)
