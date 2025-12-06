@@ -10,39 +10,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.createSavedStateHandle
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.griffith.shakealarmclockapp.alarm.AlarmScheduler
 import com.griffith.shakealarmclockapp.data.Alarm
 import com.griffith.shakealarmclockapp.data.Note
+import com.griffith.shakealarmclockapp.utils.AlarmRepository
+import kotlinx.coroutines.launch
 
 class AlarmViewModel(
     val app: Application,
     val savedState: SavedStateHandle
 
 ): ViewModel(){
-    companion object{
-        // Factory to create AlarmViewModel with required dependencies:
-        // - Application: provides context for AlarmScheduler (and incoming database)
-        // - SavedStateHandle: preserves state across process death
-        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <H : ViewModel> create(
-                modelClass: Class<H>,
-                extras: CreationExtras
-            ): H {
-                val application = checkNotNull(extras[APPLICATION_KEY]) as Application                  //To build a stable context of a ViewModel and get all dependencys
-
-                val savedStateHandle = extras.createSavedStateHandle()
-
-                return AlarmViewModel(
-                    app = application,
-                    savedState = savedStateHandle
-                ) as H
-            }
-        }
-    }
-
-
+    val repository = AlarmRepository()
     val alarms = mutableStateListOf<Alarm>()
     val notes = mutableStateListOf<Note>()
     val scheduler = AlarmScheduler(app.applicationContext)
@@ -66,6 +48,54 @@ class AlarmViewModel(
             alarmVolume = value
         }
 
+    init {                                                                                          //Initializeblock, alarms will be loaded in the same Moment the ViewModel is created
+        loadAlarms()
+    }
+
+    fun loadAlarms() {                                                                              //load Alarms from FireBase
+        viewModelScope.launch {                                                                     //starting a Coroutine = background task
+            val result = repository.loadAllAlarms()
+            result.onSuccess { loadAlarms ->
+                alarms.clear()
+                alarms.addAll(loadAlarms)
+
+                loadAlarms.forEach { alarm ->
+                    if(alarm.isEnable){
+                        scheduler.scheduleAlarm(alarm.id, alarm.hour, alarm.minute, alarm.days)
+                    }
+                }
+            }
+        }
+    }
+
+    fun safeAlarms(){                                                                               //safe Alarms in FireBase
+        viewModelScope.launch {                                                                     //starting as a background Task
+            repository.saveAllAlarm(alarms.toList())
+        }
+    }
+
+    companion object{
+        // Factory to create AlarmViewModel with required dependencies:
+        // - Application: provides context for AlarmScheduler (and incoming database)
+        // - SavedStateHandle: preserves state across process death
+        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <H : ViewModel> create(
+                modelClass: Class<H>,
+                extras: CreationExtras
+            ): H {
+                val application = checkNotNull(extras[APPLICATION_KEY]) as Application                  //To build a stable context of a ViewModel and get all dependencys
+
+                val savedStateHandle = extras.createSavedStateHandle()
+
+                return AlarmViewModel(
+                    app = application,
+                    savedState = savedStateHandle
+                ) as H
+            }
+        }
+    }
+
     fun addAlarm(_name: String, _hour: Int, _minute: Int, _isEnable: Boolean, _days: List<String> ){    //Creating and adding Alarm to the List alarms after the user created it in CreateAlarmScreen.kt
         val newAlarm = Alarm(
             name = _name,
@@ -77,6 +107,8 @@ class AlarmViewModel(
         )
         alarms.add(newAlarm)
         scheduler.scheduleAlarm(newAlarm.id, newAlarm.hour, newAlarm.minute, _days)
+
+        safeAlarms()
     }
 
     fun toggleAlarm(alarmId: String){                                                                   //The ViewModel dont have any direct access to the objects once they are "sended" to other activitys. Like a headquarter in a delivery company.
