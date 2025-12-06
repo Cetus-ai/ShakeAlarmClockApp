@@ -10,4 +10,5 @@ data class Alarm(
     val minute: Int,
     val isEnable: Boolean,
     val days: List<String>,
+    val notes: List<Note>
 )
