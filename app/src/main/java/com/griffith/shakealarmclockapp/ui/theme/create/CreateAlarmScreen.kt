@@ -95,7 +95,7 @@ fun CreateAlarm(
                 Text(
                     text = "Set Alarm",
                     fontSize = 30.sp,
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.Bold
                 )
                 Button(
@@ -156,8 +156,11 @@ fun CreateAlarm(
                             modifier = Modifier.size(45.dp),
                             shape = RoundedCornerShape(15.dp),
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = if(days[index]) Color(0xFFFFA500) else Color(0xFF9D4EDD),
-                                contentColor = Color.White
+                                containerColor = if(days[index])
+                                    MaterialTheme.colorScheme.tertiary
+                                else
+                                    MaterialTheme.colorScheme.primary,
+                                contentColor = MaterialTheme.colorScheme.onBackground
                             ),
                             contentPadding = PaddingValues(0.dp)
                         ) {

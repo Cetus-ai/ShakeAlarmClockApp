@@ -34,8 +34,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.griffith.shakealarmclockapp.data.Note
-import com.griffith.shakealarmclockapp.ui.theme.AppPurple
-import com.griffith.shakealarmclockapp.ui.theme.AppTextWhite
 import java.util.Calendar
 
 
@@ -101,7 +99,7 @@ fun CommentScreen(
                     shape = RoundedCornerShape(15.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF9D4EDD),
-                        contentColor = Color.White
+                        contentColor = MaterialTheme.colorScheme.onBackground
                     ),
                     contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
                 ) {

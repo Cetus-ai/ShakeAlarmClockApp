@@ -19,7 +19,9 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -78,12 +80,12 @@ fun AlarmItem(
                         text = alarm.name,
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                     Text(
                         text = String.format("%02d:%02d", alarm.hour, alarm.minute),                  //Defines the format in which the time should be displayed in the note
                         fontSize = 30.sp,
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                     LazyRow (
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -93,7 +95,7 @@ fun AlarmItem(
                             Text(
                                 text = day,
 //                                color = Color(0xFFFFA500),
-                                color = Color.White,
+                                color = MaterialTheme.colorScheme.onBackground,
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold
                             )
@@ -106,7 +108,11 @@ fun AlarmItem(
                 ){
                     Switch(
                         checked = alarm.isEnable,                                                     //The Toggle to turn the alam on/off
-                        onCheckedChange = { onToggle() }
+                        onCheckedChange = { onToggle() },
+                        colors = SwitchDefaults.colors(
+                            checkedIconColor = MaterialTheme.colorScheme.onSurface,
+                            checkedTrackColor = MaterialTheme.colorScheme.tertiary
+                        )
                     )
                     Box(                                                                              //A DropdownMenu to add some alarm specific function
                         modifier = Modifier
