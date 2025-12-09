@@ -57,7 +57,8 @@ fun CommentScreen(
         Column (
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(paddingValues),
+                .padding(paddingValues)
+                .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             Row (

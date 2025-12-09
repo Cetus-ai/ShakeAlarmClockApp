@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.griffith.shakealarmclockapp.alarm.AlarmScheduler
 import com.griffith.shakealarmclockapp.data.Alarm
 import com.griffith.shakealarmclockapp.data.Note

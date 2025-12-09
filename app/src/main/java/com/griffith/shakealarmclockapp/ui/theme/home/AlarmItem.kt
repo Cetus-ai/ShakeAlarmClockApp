@@ -64,17 +64,17 @@ fun AlarmItem(
             modifier = Modifier
                 .fillMaxSize()
                 .background(brush = gradient)
-                .padding(20.dp)
+                .padding(16.dp)
         ){
             Row (
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(35.dp),
+                    .padding(16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Column (
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ){
                     Text(                                                                             //Displaying the Namke of the Alarm
                         text = alarm.name,
@@ -84,7 +84,7 @@ fun AlarmItem(
                     )
                     Text(
                         text = String.format("%02d:%02d", alarm.hour, alarm.minute),                  //Defines the format in which the time should be displayed in the note
-                        fontSize = 30.sp,
+                        fontSize = 28.sp,
                         color = MaterialTheme.colorScheme.onBackground
                     )
                     LazyRow (
@@ -96,7 +96,7 @@ fun AlarmItem(
                                 text = day,
 //                                color = Color(0xFFFFA500),
                                 color = MaterialTheme.colorScheme.onBackground,
-                                fontSize = 20.sp,
+                                fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold
                             )
                         }
@@ -104,7 +104,7 @@ fun AlarmItem(
                 }
                 Row (
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy((30).dp),
+                    horizontalArrangement = Arrangement.spacedBy((16).dp),
                 ){
                     Switch(
                         checked = alarm.isEnable,                                                     //The Toggle to turn the alam on/off

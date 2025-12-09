@@ -20,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -72,6 +71,7 @@ fun HomeScreen(
         Column (
             modifier = Modifier
                 .fillMaxSize()
+                .padding(horizontal = 16.dp)
                 .padding(paddingValues),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
@@ -79,7 +79,8 @@ fun HomeScreen(
                 text = "Alarms",                                                                //The Titel on the Top
                 fontSize = 30.sp,
                 color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(vertical = 16.dp)
             )
 
             LazyColumn (                                                                        //A LazyColumn in which I iterate through a list of alarms and list them here

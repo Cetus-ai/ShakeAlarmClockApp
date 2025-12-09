@@ -29,7 +29,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,12 +64,15 @@ fun CreateAlarm(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues),
+                .padding(paddingValues)
+                .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -133,21 +135,25 @@ fun CreateAlarm(
             }
             Column(
                 modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
                 OutlinedTextField(                                                                //The User can give a Name to his Alarm (Optional)
                     value = alarmName,
                     onValueChange = { alarmName = it },
                     label = { Text("Alarm Name") },
                     modifier = Modifier
-                        .padding(bottom = 32.dp)
-                        .padding(top = 50.dp)
+                        .fillMaxWidth()
+//                        .padding(bottom = 32.dp)
+//                        .padding(top = 50.dp)
                 )
 
                 TimePicker(state = timerPickerState)                                              //Presenting the TimePicker we created in line 45
 
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     weekdays.forEachIndexed { index, day ->                                       //Iterating through weekdays. As i said they are working parallel to each other
