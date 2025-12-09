@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,20 +25,18 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingScreen(
     avm: AlarmViewModel,
 ){
-    val context = LocalContext.current                                                          //The reason like in HomeScreen.kt. This context will help the intent to know where is actually is
+    val context = LocalContext.current                                                              //The reason like in HomeScreen.kt. This context will help the intent to know where is actually is
 
     Scaffold{ paddingValues ->
         Column(
@@ -47,23 +46,25 @@ fun SettingScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ){
+            Box(
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Button(
                     onClick = {
                         val newContext = context as ComponentActivity                               //I am in a Composable here, intents only work with Components. So i had to convert it into it so that the intent function '.finish()' can be used
                         newContext.finish()
                     },
                     modifier = Modifier
+                        .align(Alignment.CenterStart)
                         .width(85.dp)
                         .height(40.dp),
                     shape = RoundedCornerShape(15.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.onPrimary,
-                        contentColor = MaterialTheme.colorScheme.onSurface
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(
+                        defaultElevation = 0.dp
                     ),
                     contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
                 ) {
@@ -73,11 +74,13 @@ fun SettingScreen(
                         fontWeight = FontWeight.Bold
                     )
                 }
+
                 Text(
                     text = "Settings",
                     fontSize = 30.sp,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontWeight = FontWeight.Bold
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.align(Alignment.Center)
                 )
             }
 
@@ -92,7 +95,7 @@ fun SettingScreen(
                     TitelInputbox(
                         titel = "Snooze Time",
                         value = avm.SnoozeDurationProp.toString(),
-                        onValueChange = { avm.SnoozeDurationProp = it.toIntOrNull()?: 0 }       //*1 The Input is directly transfer to the ViewModel. It's gonna be handle as a global setting. Not Alarm wise but Application wise
+                        onValueChange = { avm.SnoozeDurationProp = it.toIntOrNull()?: 0 }           //*1 The Input is directly transfer to the ViewModel. It's gonna be handle as a global setting. Not Alarm wise but Application wise
                     )
                 }
 
@@ -104,7 +107,7 @@ fun SettingScreen(
                     TitelSlidebar(
                         titel = "Alarm Volume",
                         value = avm.AlarmVolumeProp,
-                        onValueChange = {range -> avm.AlarmVolumeProp = range}                  //*1
+                        onValueChange = {range -> avm.AlarmVolumeProp = range}                      //*1
                     )
                 }
 
@@ -116,7 +119,7 @@ fun SettingScreen(
                     TextButton(onClick = {
                         val githubIntent = Intent(
                             Intent.ACTION_VIEW,
-                            Uri.parse("https://github.com/Cetus-ai/ShakeAlarmClockApp")     //This time it's not a explicit intent but a implicit intent. This time im not saying exactly You are in Point A and go to Point B. Im just saying "go to the website, find your way"
+                            Uri.parse("https://github.com/Cetus-ai/ShakeAlarmClockApp")   //This time it's not a explicit intent but a implicit intent. This time im not saying exactly You are in Point A and go to Point B. Im just saying "go to the website, find your way"
                         )
                         context.startActivity(githubIntent)
                     },

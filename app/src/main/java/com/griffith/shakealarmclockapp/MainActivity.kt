@@ -9,6 +9,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.griffith.shakealarmclockapp.navigation.NavGraph
+import com.griffith.shakealarmclockapp.ui.theme.ShakeAlarmClockAppTheme
 import com.griffith.shakealarmclockapp.utils.PermissionHelper
 
 class MainActivity : ComponentActivity() {
@@ -22,14 +23,20 @@ class MainActivity : ComponentActivity() {
         permissionHelper = PermissionHelper(this)
         permissionHelper.askingPermission()
 
+//        setContent {
+//            MaterialTheme(
+//                colorScheme = darkColorScheme(
+//                    background = Color(0xFF2C2C2E)          //Backgroundcolor of the entire Application
+//                )
+//            ){
+//                val navController = rememberNavController()        //Creating a navController
+//                NavGraph(navController = navController)            //Starting the NavGraph
+//            }
+//        }
         setContent {
-            MaterialTheme(
-                colorScheme = darkColorScheme(
-                    background = Color(0xFF2C2C2E)          //Backgroundcolor of the entire Application
-                )
-            ){
-                val navController = rememberNavController()        //Creating a navController
-                NavGraph(navController = navController)            //Starting the NavGraph
+            ShakeAlarmClockAppTheme {
+                val navController = rememberNavController()
+                NavGraph(navController = navController)
             }
         }
     }
