@@ -99,7 +99,10 @@ fun SettingScreen(
                     TitelSlidebar(
                         titel = "Shake Intensity",
                         value = avm.ShakeIntensityProp,
-                        onValueChange = {range -> avm.ShakeIntensityProp = range},                  //*1 The Input is directly transfer to the ViewModel. It's gonna be handle as a global setting. Not Alarm wise but Application wise
+                        onValueChange = {range ->
+                            avm.ShakeIntensityProp = range
+                            avm.saveSettings()
+                        },                  //*1 The Input is directly transfer to the ViewModel. It's gonna be handle as a global setting. Not Alarm wise but Application wise
                     )
                 }
 
@@ -111,7 +114,10 @@ fun SettingScreen(
                     TitelSlidebar(
                         titel = "Alarm Volume",
                         value = avm.AlarmVolumeProp,
-                        onValueChange = {range -> avm.AlarmVolumeProp = range}                      //*1
+                        onValueChange = {range ->
+                            avm.AlarmVolumeProp = range
+                            avm.saveSettings()
+                        }                      //*1
                     )
                 }
 

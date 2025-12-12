@@ -12,10 +12,19 @@ class AlarmRepository {
 
     val db: FirebaseFirestore = Firebase.firestore                                                  //Access to FireBase
     val alarmsDoc = db.collection("app_data").document("alarms")       //Find/Create collection "app_data" and take document "alarms"
+    val settingsDoc = db.collection("app_data").document("settings")
 
     suspend fun saveAllAlarm(alarms: List<Alarm>){                                                  //asynch: Must wait for response from FireBase
         val data = hashMapOf("alarms" to alarms)
         alarmsDoc.set(data).await()
+    }
+
+    suspend fun saveAllSettings(shakeIntensity: Float, alarmVolumn: Float){
+        val data = hashMapOf(
+            "shakeIntensity" to shakeIntensity,
+            "alarmVolume" to alarmVolumn
+        )
+        settingsDoc.set(data).await()
     }
 
     suspend fun loadAllAlarms(): Result<List<Alarm>> {                                              //reading data from Firebase and combine it into alarms
@@ -43,6 +52,17 @@ class AlarmRepository {
             }
 
             Result.success(alarms)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun loadSettings(): Result<Pair<Float, Float>> {
+        return try {
+            val snapshot = settingsDoc.get().await()
+            val shakeIntensity = snapshot.get("shakeIntensity") as? Double ?: 15.0
+            val alarmVolume = snapshot.get("alarmVolume") as? Double ?: 50.0
+            Result.success(Pair(shakeIntensity.toFloat(), alarmVolume.toFloat()))
         } catch (e: Exception) {
             Result.failure(e)
         }

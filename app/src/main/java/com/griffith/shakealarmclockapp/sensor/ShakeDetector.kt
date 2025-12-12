@@ -11,7 +11,7 @@ import kotlin.math.sqrt
 class ShakeDetector(
     context: Context,
     val shakeSensitivity: Float = 10f,
-    val requiredShakes: Int = 10,
+    var requiredShakes: Int = 10,
     val onShakeProgress: (Int, Int) -> Unit,
     val onShake: () -> Unit
 ) : SensorEventListener {

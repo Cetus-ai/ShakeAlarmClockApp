@@ -31,7 +31,9 @@ fun TitelSlidebar(
             )
             Slider(
                 value = value,
-                onValueChange = onValueChange,
+                onValueChange = { newValue ->
+                    onValueChange(newValue)
+                },
                 valueRange = 0f..100f
             )
         }

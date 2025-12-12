@@ -47,6 +47,7 @@ class AlarmViewModel(
 
     init {                                                                                          //Initializeblock, alarms will be loaded in the same Moment the ViewModel is created
         loadAlarms()
+        loadSettings()
     }
 
     fun loadAlarms() {                                                                              //load Alarms from FireBase
@@ -74,6 +75,22 @@ class AlarmViewModel(
                 alarm.copy(notes = alarmNotes)
             }
             repository.saveAllAlarm(alarmsWithNotes)
+        }
+    }
+
+    fun loadSettings() {
+        viewModelScope.launch {
+            val result = repository.loadSettings()
+            result.onSuccess { settings ->
+                shakeIntensity = settings.first
+                alarmVolume = settings.second
+            }
+        }
+    }
+
+    fun saveSettings() {
+        viewModelScope.launch {
+            repository.saveAllSettings(shakeIntensity, alarmVolume)
         }
     }
 

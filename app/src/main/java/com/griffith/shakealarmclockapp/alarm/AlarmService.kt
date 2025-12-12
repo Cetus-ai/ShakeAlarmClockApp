@@ -10,7 +10,10 @@ import android.media.MediaPlayer
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.griffith.shakealarmclockapp.R
+import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 
 
 class AlarmService : Service(){
@@ -21,13 +24,21 @@ class AlarmService : Service(){
 
     //Call the notifaction and create the alarmsound
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        android.util.Log.d("AlarmService", "Service started!")
+//        android.util.Log.d("AlarmService", "Service started!")
         val alarmId = intent.getStringExtra("ALARM_ID")
 
         ensureChannel()
         startForeground(1, buildNotification(alarmId))
 
+        val viewModel = AlarmViewModel(
+            app = application,
+            savedState = SavedStateHandle()
+        )
+        
+        val volume = viewModel.AlarmVolumeProp
+
         mediaPlayer = MediaPlayer.create(this, R.raw.air_raid_siren)
+        mediaPlayer?.setVolume(volume / 100, volume / 100)
 
         mediaPlayer?.start()
 
