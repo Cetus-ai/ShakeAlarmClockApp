@@ -6,38 +6,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-
-//This function provide a SettingItem with a Text and a Textfield for the SnoozerDuration in minutes
-@Composable
-fun TitelInputbox(
-    titel: String,
-    value: String,
-    onValueChange: (String) -> Unit
-){
-    Card(
-        modifier = Modifier
-            .fillMaxSize()
-    ){
-        Column {
-            Text(
-                text = titel,
-                color = Color.White,
-                fontWeight = FontWeight.Bold
-            )
-            TextField(
-                value = value,
-                onValueChange = onValueChange,
-                placeholder = {Text("Minutes")}
-            )
-        }
-
-    }
-}
 
 //This function provide a SettingItem with a Text and a Slider for the Alarmvolume
 @ExperimentalMaterial3Api

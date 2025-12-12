@@ -27,16 +27,14 @@ class AlarmViewModel(
     val alarms = mutableStateListOf<Alarm>()
     val notes = mutableStateListOf<Note>()
     val scheduler = AlarmScheduler(app.applicationContext)
-    var snoozerDuration by mutableStateOf(5)
+    var shakeIntensity by mutableStateOf(15.0F)
     var alarmVolume by mutableStateOf(50.0F)
-    var SnoozeDurationProp: Int                                                                         //This is the property for the Snoozer duration, the values are set in SettingScreen.kt
+    var ShakeIntensityProp: Float                                                                         //This is the property for the Shake intensity, the values are set in SettingScreen.kt
         get() {
-            return snoozerDuration
+            return shakeIntensity
         }
         set(value) {
-            if(value > 5)
-                SnoozeDurationProp = 5
-            snoozerDuration = value
+            shakeIntensity = value
         }
 
     var AlarmVolumeProp: Float                                                                          //This is the property for the Alarm Volume, the values are set in SettingScreen.kt

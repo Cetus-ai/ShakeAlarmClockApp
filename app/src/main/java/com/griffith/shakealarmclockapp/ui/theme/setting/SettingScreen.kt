@@ -96,10 +96,10 @@ fun SettingScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 item {
-                    TitelInputbox(
-                        titel = "Snooze Time",
-                        value = avm.SnoozeDurationProp.toString(),
-                        onValueChange = { avm.SnoozeDurationProp = it.toIntOrNull()?: 0 }           //*1 The Input is directly transfer to the ViewModel. It's gonna be handle as a global setting. Not Alarm wise but Application wise
+                    TitelSlidebar(
+                        titel = "Shake Intensity",
+                        value = avm.ShakeIntensityProp,
+                        onValueChange = {range -> avm.ShakeIntensityProp = range},                  //*1 The Input is directly transfer to the ViewModel. It's gonna be handle as a global setting. Not Alarm wise but Application wise
                     )
                 }
 
