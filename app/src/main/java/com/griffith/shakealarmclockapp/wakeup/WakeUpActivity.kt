@@ -19,6 +19,7 @@ class WakeUpActivity : ComponentActivity() {
     var shakeDetector: ShakeDetector? = null
 
     var shakeProgress by mutableStateOf(0)
+    var shakeTarget by mutableStateOf(20)
 
     // Sets up alarm screen: unlock flags, shake detection, and UI
     override fun onCreate(savedInstanceState: Bundle?){
@@ -29,10 +30,6 @@ class WakeUpActivity : ComponentActivity() {
             WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
         )
 
-        shakeDetector = ShakeDetector(context = this) {
-            WakeUpManager.dismissAlarm(context = this)
-            finish()
-        }
         shakeDetector?.start()
 
         setContent {
@@ -42,7 +39,20 @@ class WakeUpActivity : ComponentActivity() {
 
             val sensitivity = viewModel.ShakeIntensityProp
 
-
+            shakeDetector = ShakeDetector(
+                context = this,
+                shakeSensitivity = sensitivity,
+                requiredShakes = 20,
+                onShakeProgress = { current, total ->
+                    shakeProgress = current
+                    shakeTarget = total
+                },
+                onShake = {
+                    WakeUpManager.dismissAlarm(context = this)
+                    finish()
+                }
+            )
+            shakeDetector?.start()
 
             MaterialTheme(
                 colorScheme = darkColorScheme(
@@ -52,12 +62,10 @@ class WakeUpActivity : ComponentActivity() {
                 WakeUpScreen(
                     alarmId = intent.getStringExtra("ALARM_ID"),
                     viewModel = viewModel,
+                    shakeProgress = shakeProgress,
+                    shakeTarget = shakeTarget,
                     onDismiss = {
                         WakeUpManager.dismissAlarm(context = this)
-                        finish()
-                    },
-                    onSnooze = { duration ->
-                        WakeUpManager.snoozeAlarm(this, duration)
                         finish()
                     }
                 )

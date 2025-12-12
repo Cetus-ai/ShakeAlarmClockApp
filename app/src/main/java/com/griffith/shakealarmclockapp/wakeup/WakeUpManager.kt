@@ -21,13 +21,9 @@ class WakeUpManager{
         }
 
         //Get the notes from the ViewModel
-        fun loadReminders(alarmId: String, viewModel: AlarmViewModel): List<Note>{
-            noteList = viewModel.notes.filter { true }
-            return noteList
-        }
-
-//        fun shakeDetected(): Boolean{
-//
+//        fun loadReminders(alarmId: String, viewModel: AlarmViewModel): List<Note>{
+//            noteList = viewModel.notes.filter { true }
+//            return noteList
 //        }
 
         // Stops the alarm sound service and resets the WakeUpManager state (at the moment just clearing the notes)
@@ -41,12 +37,6 @@ class WakeUpManager{
         //Clearing notes, another alarms ring, other notes are required
         fun reset(){
             noteList = emptyList()
-        }
-
-        //The snoozefunction (im working on)
-        fun snoozeAlarm(context: Context, snoozeDuration: Int){
-//            TODO
-            dismissAlarm(context)
         }
     }
 

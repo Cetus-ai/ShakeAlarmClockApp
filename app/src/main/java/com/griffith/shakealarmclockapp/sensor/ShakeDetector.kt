@@ -5,16 +5,24 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import com.griffith.shakealarmclockapp.wakeup.WakeUpManager.Companion.reset
 import kotlin.math.sqrt
 
 class ShakeDetector(
     context: Context,
-    private val onShake: () -> Unit
+    val shakeSensitivity: Float = 10f,
+    val requiredShakes: Int = 10,
+    val onShakeProgress: (Int, Int) -> Unit,
+    val onShake: () -> Unit
 ) : SensorEventListener {
 
-    val shakeSensitivity = 15f
+//    val currentTime = System.currentTimeMillis()
     val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-    private val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+    var shakeCount = 0
+    var lastshakeTime = 0L
+    var shakeDetection = 300L
 
     //inherits from SensorEventListener, the fun onAccuracyChanged must occur, but I don't need it
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
@@ -32,7 +40,18 @@ class ShakeDetector(
         val acceleration = sqrt(x * x + y * y + z * z) - SensorManager.GRAVITY_EARTH
 
         if(acceleration > shakeSensitivity){
-            onShake()
+            val currentTime = System.currentTimeMillis()
+            if(currentTime - lastshakeTime > shakeDetection){
+                lastshakeTime = currentTime
+                shakeCount++
+
+                onShakeProgress(shakeCount, requiredShakes)
+
+                if(shakeCount >= requiredShakes){
+                    onShake()
+                    reset()
+                }
+            }
         }
     }
 

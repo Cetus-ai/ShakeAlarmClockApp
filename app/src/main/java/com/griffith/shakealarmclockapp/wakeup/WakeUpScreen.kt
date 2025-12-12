@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -19,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,17 +33,17 @@ import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 fun WakeUpScreen(
     alarmId: String?,
     viewModel: AlarmViewModel,
-    shakePrograss: Int,
+    shakeProgress: Int,
+    shakeTarget: Int,
     onDismiss: () -> Unit,
-    onSnooze: (Int) -> Unit
 ) {
     val notes = viewModel.filterNotes(alarmId ?: "")
 
-    val progress by animateFloatAsState(
-        shakePrograss.toFloat() / 20.0.toFloat(),
-        animationSpec = tween (durationMillis = 200),
-        label = "progress"
-    )
+    val progress = if (shakeTarget > 0) {
+        (shakeProgress.toFloat() / shakeTarget.toFloat()).coerceIn(0f, 1f)
+    } else {
+        0f
+    }
 
     Scaffold { paddingValues ->
         Column(
@@ -93,6 +96,30 @@ fun WakeUpScreen(
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.primary
             )
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Shake to dismiss ($shakeProgress/$shakeTarget)",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                LinearProgressIndicator(
+                    progress = { progress },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(6.dp)
+                        .clip(RoundedCornerShape(3.dp)),
+                    color = MaterialTheme.colorScheme.primary,
+                    trackColor = MaterialTheme.colorScheme.surfaceVariant
+                )
+            }
         }
     }
 }
