@@ -1,6 +1,8 @@
 package com.griffith.shakealarmclockapp.wakeup
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -27,10 +30,17 @@ import com.griffith.shakealarmclockapp.viewmodel.AlarmViewModel
 fun WakeUpScreen(
     alarmId: String?,
     viewModel: AlarmViewModel,
+    shakePrograss: Int,
     onDismiss: () -> Unit,
     onSnooze: (Int) -> Unit
 ) {
     val notes = viewModel.filterNotes(alarmId ?: "")
+
+    val progress by animateFloatAsState(
+        shakePrograss.toFloat() / 20.0.toFloat(),
+        animationSpec = tween (durationMillis = 200),
+        label = "progress"
+    )
 
     Scaffold { paddingValues ->
         Column(
@@ -74,6 +84,15 @@ fun WakeUpScreen(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = "Shake to dismiss",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.primary
+            )
         }
     }
 }
