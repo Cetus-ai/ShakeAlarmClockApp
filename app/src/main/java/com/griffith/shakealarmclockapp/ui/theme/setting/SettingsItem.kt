@@ -2,6 +2,7 @@ package com.griffith.shakealarmclockapp.ui.theme.setting
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Slider
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 
 //This function provide a SettingItem with a Text and a Slider for the Alarmvolume
 @ExperimentalMaterial3Api
@@ -23,7 +25,10 @@ fun TitelSlidebar(
         modifier = Modifier
             .fillMaxSize()
     ){
-        Column {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
             Text(
                 text = titel,
                 color = Color.White,
@@ -37,7 +42,6 @@ fun TitelSlidebar(
                 valueRange = 0f..100f
             )
         }
-
     }
 }
 
@@ -51,7 +55,10 @@ fun TitelSubtitle(
         modifier = Modifier
             .fillMaxSize()
     ){
-        Column {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
             Text(
                 text = title,
                 color = Color.White,
