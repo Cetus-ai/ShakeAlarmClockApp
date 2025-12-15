@@ -27,7 +27,7 @@ class AlarmRepository {
         settingsDoc.set(data).await()
     }
 
-    suspend fun loadAllAlarms(): Result<List<Alarm>> {                                              //reading data from Firebase and combine it into alarms
+    suspend fun loadAllAlarms(): Result<List<Alarm>> {                                              //reading data from Firebase and create it into alarms
         return try {
             val snapshot = alarmsDoc.get().await()
             val alarmsList = snapshot.get("alarms") as? List<Map<String, Any>> ?: emptyList()       //FireBase always keep a Key as String, but the alarm has different data types (=any)
@@ -57,7 +57,7 @@ class AlarmRepository {
         }
     }
 
-    suspend fun loadSettings(): Result<Pair<Float, Float>> {
+    suspend fun loadSettings(): Result<Pair<Float, Float>> {                                        //reading data from Firebase and combine it into alarms
         return try {
             val snapshot = settingsDoc.get().await()
             val shakeIntensity = snapshot.get("shakeIntensity") as? Double ?: 15.0

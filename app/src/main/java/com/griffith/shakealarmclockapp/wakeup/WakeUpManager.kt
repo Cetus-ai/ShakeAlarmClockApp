@@ -20,12 +20,6 @@ class WakeUpManager{
             context.startActivity(intent)
         }
 
-        //Get the notes from the ViewModel
-//        fun loadReminders(alarmId: String, viewModel: AlarmViewModel): List<Note>{
-//            noteList = viewModel.notes.filter { true }
-//            return noteList
-//        }
-
         // Stops the alarm sound service and resets the WakeUpManager state (at the moment just clearing the notes)
         fun dismissAlarm(context: Context){
             val serviceIntent = Intent(context, AlarmService::class.java)

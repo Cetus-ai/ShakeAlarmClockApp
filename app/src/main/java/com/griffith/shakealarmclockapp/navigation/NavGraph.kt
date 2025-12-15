@@ -18,8 +18,6 @@ fun NavGraph(
     val viewmodel: AlarmViewModel = viewModel(
         factory = AlarmViewModel.Factory
     )
-//    val app = LocalContext.current.applicationContext as Application
-//    val viewmodel = remember { AlarmViewModel() }                                                       //Creating a object from type AlarmViewModel to gain access of his functions
 
     NavHost(navController = navController, startDestination = "home"){                                  //From where the NavController will navigate, the Start
 
@@ -54,7 +52,7 @@ fun NavGraph(
         }
 
 
-        composable ("note/{alarmId}"){ backStackEntry ->                                        ////Callback implementation for the CommentScreen
+        composable ("note/{alarmId}"){ backStackEntry ->                                        //Callback implementation for the CommentScreen
             val alarmId = backStackEntry.arguments?.getString("alarmId") ?: ""
             CommentScreen(
                 alarmId = alarmId,
@@ -68,7 +66,7 @@ fun NavGraph(
             )
         }
 
-        composable ("edit/{alarmId}"){ backStackEntry ->
+        composable ("edit/{alarmId}"){ backStackEntry ->                                        //Callback implementation back to CreateAlarmScreen to edit the alarm
             val alarmId = backStackEntry.arguments?.getString("alarmId") ?: ""
             val alarm = viewmodel.alarms.find { it.id == alarmId }
 

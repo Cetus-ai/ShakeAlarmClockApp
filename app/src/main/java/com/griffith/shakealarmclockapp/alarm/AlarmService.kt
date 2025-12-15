@@ -45,11 +45,6 @@ class AlarmService : Service(){
         return START_NOT_STICKY
     }
 
-//    fun stopPlayer(){
-//        mediaPlayer?.stop()
-//        mediaPlayer?.release()
-//    }
-
     //Reset mediaplayer
     override fun onDestroy() {
         mediaPlayer?.stop()
