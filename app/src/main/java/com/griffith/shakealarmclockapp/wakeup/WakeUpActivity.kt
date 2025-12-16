@@ -30,8 +30,6 @@ class WakeUpActivity : ComponentActivity() {
             WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
         )
 
-        shakeDetector?.start()
-
         setContent {
             val viewModel: AlarmViewModel = viewModel(
                 factory = AlarmViewModel.Factory

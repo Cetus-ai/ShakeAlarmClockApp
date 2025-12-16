@@ -11,7 +11,7 @@ import kotlin.collections.toIntArray
 class AlarmScheduler(private val context: Context) {
     val alarmManager = context.getSystemService(AlarmManager::class.java)
 
-    //Checking if the deivce has Android 12 or higher (Android has changed the ploicey regarding exactAlarms after version 11.)
+    //Checking if the deivce has Android 12 or higher (Android has changed the police regarding exactAlarms after version 11.)
     fun checkPermission(): Boolean{
         return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
             alarmManager.canScheduleExactAlarms()

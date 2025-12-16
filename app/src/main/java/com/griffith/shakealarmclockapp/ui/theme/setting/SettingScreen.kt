@@ -93,7 +93,7 @@ fun SettingScreen(
                 }
                 item {
                     TitelSlidebar(
-                        titel = "Shake Intensity",
+                        titel = "Shake Sensitivity",
                         value = avm.ShakeIntensityProp,
                         onValueChange = {range ->
                             avm.ShakeIntensityProp = range
